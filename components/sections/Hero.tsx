@@ -6,7 +6,7 @@ import { useI18n } from "@/lib/i18n";
 import { whatsappLink } from "@/lib/site";
 import { scrollToSection } from "@/lib/hooks";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { Cube, Glow, Sparkle, Wave } from "@/components/ui/Decor";
+import { Arch, Cube, Glow, Ring, SoftStar, Sparkle, Wave } from "@/components/ui/Decor";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { HeroVideo } from "@/components/hero/HeroVideo";
 
@@ -38,7 +38,7 @@ export function Hero() {
       <Glow className="-left-32 top-10 size-[340px] opacity-35 lg:size-[440px]" color="#FFE326" />
       <Glow className="-right-24 top-1/3 size-[300px] opacity-25 lg:size-[380px]" color="#159FE2" />
       <Sparkle className="absolute left-[46%] top-8 hidden w-6 animate-twinkle lg:block" color="#FFE326" />
-      <Sparkle className="absolute left-[4%] top-[58%] hidden w-5 animate-twinkle [animation-delay:1.4s] lg:block" color="#E83A32" />
+      <Sparkle className="absolute left-[4%] top-[58%] hidden w-5 animate-twinkle [animation-delay:1.4s] lg:block" color="#159FE2" />
       <Cube className="absolute -right-3 top-6 w-12 animate-float [--r:14deg] lg:hidden" color="#80C924" />
 
       <div className="container-site relative">
@@ -55,7 +55,7 @@ export function Hero() {
           <h1
             id="hero-title"
             data-area="title"
-            className="h-display mt-5 max-w-[15ch] lg:mt-4 lg:max-w-none"
+            className="h-display mt-5 max-w-[19ch] lg:mt-4 lg:max-w-none"
           >
             <span className="relative inline-block whitespace-nowrap">
               {t.hero.titleBrand}
@@ -98,7 +98,11 @@ export function Hero() {
             </a>
           </motion.div>
 
-          <div data-area="media" className="relative mt-10 lg:mt-0 lg:self-center">
+          <div data-area="media" className="relative isolate mt-10 lg:mt-0 lg:self-center">
+            {/* фигуры частично за видео */}
+            <Arch className="absolute -right-3 -top-5 -z-10 w-24 animate-wiggle [--r:8deg] sm:w-32 lg:-right-8 lg:-top-7 lg:w-40" color="#FFE326" />
+            <Ring className="absolute -bottom-6 right-[12%] -z-10 hidden w-24 animate-spin-slower sm:block" color="#80C924" />
+            <SoftStar className="absolute -left-4 top-[12%] z-10 hidden w-10 animate-wiggle [animation-delay:-2s] lg:block" color="#E83A32" />
             <HeroVideo />
             {/* Адам приветствует — крупный, стоит у края рамки видео.
                 Телефон: в левом нижнем углу, частично ниже рамки. Десктоп: выходит за левый край рамки. */}

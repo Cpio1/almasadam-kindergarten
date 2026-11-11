@@ -12,7 +12,7 @@ import { MascotFigure } from "@/components/ui/MascotFigure";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon } from "@/components/ui/BrandIcons";
-import { Cube, Sparkle, Wave } from "@/components/ui/Decor";
+import { Cloud, Cube, HalfCircle, Sparkle, Wave } from "@/components/ui/Decor";
 
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const { t, lang } = useI18n();
@@ -81,7 +81,7 @@ export function News() {
   const sorted = [...news].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <section id="news" aria-labelledby="news-title" className="section-clip relative bg-milk">
+    <section id="news" aria-labelledby="news-title" className="section-clip relative bg-white">
       <div className="container-site section-y !pt-8 lg:!pt-8">
         <SectionHeading id="news-title" eyebrow={t.news.eyebrow} title={t.news.title} tone="sun" />
 
@@ -93,29 +93,35 @@ export function News() {
           </div>
         ) : (
           <Reveal className="mt-10 lg:mt-9">
-            <div className="relative overflow-hidden rounded-[36px] bg-white p-6 shadow-soft ring-1 ring-violet-50 sm:p-10 lg:rounded-[40px_40px_40px_14px] lg:px-12 lg:py-8">
-              <Sparkle className="absolute right-[6%] top-8 w-7 animate-twinkle" color="#FFE326" />
-              <Cube className="absolute -bottom-3 right-[30%] hidden w-14 animate-float [--r:-10deg] md:block" color="#159FE2" />
-              <div className="flex flex-col items-center gap-8 text-center md:flex-row md:text-left">
-                <MascotFigure
-                  pose="news"
-                  variant="float"
-                  size="custom"
-                  floatIntensity={0.8}
-                  delay={0.1}
-                  className="w-[clamp(150px,44vw,180px)] lg:w-[clamp(160px,12vw,200px)]"
-                  sizes="200px"
-                />
+            <div className="relative overflow-hidden rounded-[36px_36px_36px_12px] bg-sky-50 px-6 pb-8 pt-6 sm:px-10 lg:rounded-[48px_48px_48px_14px] lg:px-12 lg:py-7">
+              <Cloud className="absolute -right-4 top-5 w-28 animate-drift sm:w-36" color="#ffffff" />
+              <Cloud className="absolute bottom-6 left-[42%] hidden w-20 animate-drift [animation-delay:-4s] md:block" color="#ffffff" />
+              <Sparkle className="absolute right-[24%] top-8 w-6 animate-twinkle" color="#FFE326" />
+              <Cube className="absolute -bottom-3 right-[8%] hidden w-14 animate-float [--r:-10deg] md:block" color="#E83A32" />
+              <div className="relative flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
+                <div className="relative">
+                  {/* Адам на полукруге-«солнце» */}
+                  <HalfCircle className="absolute bottom-0 left-1/2 w-[120%] -translate-x-1/2" color="#FFE326" />
+                  <MascotFigure
+                    pose="news"
+                    variant="float"
+                    size="custom"
+                    floatIntensity={0.8}
+                    delay={0.1}
+                    className="w-[clamp(140px,40vw,170px)] lg:w-[clamp(150px,11vw,180px)]"
+                    sizes="190px"
+                  />
+                </div>
                 <div className="max-w-xl md:pl-6">
-                  <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.65rem)] lg:text-[1.4rem] font-extrabold leading-snug text-violet">
+                  <p className="font-display text-[clamp(1.3rem,1rem+1vw,1.7rem)] font-black leading-snug text-violet">
                     {t.news.empty}
                   </p>
-                  <p className="mt-3 text-ink-soft">{t.news.emptyHint}</p>
+                  <p className="mt-1.5 text-ink-soft">{t.news.emptyHint}</p>
                   <a
                     href={site.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary mt-6"
+                    className="btn btn-primary mt-5"
                   >
                     <InstagramIcon className="size-5" />
                     {t.news.instagramCta}
@@ -126,7 +132,7 @@ export function News() {
           </Reveal>
         )}
       </div>
-      <Wave fill="#FFFFFF" />
+      <Wave fill="#FFFCF5" />
     </section>
   );
 }

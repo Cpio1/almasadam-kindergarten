@@ -47,6 +47,10 @@
   --animate-twinkle: twinkle 3.6s ease-in-out infinite;
   --animate-spin-slow: spin 24s linear infinite;
   --animate-bob: bob 4.8s ease-in-out infinite;
+  --animate-wiggle: wiggle 5.5s ease-in-out infinite;
+  --animate-drift: drift 11s ease-in-out infinite;
+  --animate-morph: morph 14s ease-in-out infinite;
+  --animate-spin-slower: spin 40s linear infinite;
 
   @keyframes float {
     0%,
@@ -64,6 +68,36 @@
     }
     50% {
       transform: translateY(-4px);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(calc(var(--r, 0deg) - 7deg));
+    }
+    50% {
+      transform: rotate(calc(var(--r, 0deg) + 7deg));
+    }
+  }
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(var(--r, 0deg));
+    }
+    33% {
+      transform: translate(8px, -10px) rotate(calc(var(--r, 0deg) + 6deg));
+    }
+    66% {
+      transform: translate(-6px, 6px) rotate(calc(var(--r, 0deg) - 4deg));
+    }
+  }
+  @keyframes morph {
+    0%,
+    100% {
+      border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%;
+    }
+    50% {
+      border-radius: 42% 58% 40% 60% / 58% 40% 60% 42%;
     }
   }
   @keyframes twinkle {
@@ -327,6 +361,29 @@ html.i18n-pending footer {
         ".     media";
       column-gap: clamp(32px, 4vw, 72px);
     }
+  }
+
+  /* Нестандартные формы — для фото, фонов и акцентов (не для обычных карточек) */
+  .shape-arch {
+    border-radius: 999px 999px 28px 28px;
+  }
+  .shape-arch-down {
+    border-radius: 28px 28px 999px 999px;
+  }
+  .shape-blob {
+    border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%;
+  }
+  .shape-blob-2 {
+    border-radius: 40% 60% 46% 54% / 60% 38% 62% 40%;
+  }
+  .shape-leaf {
+    border-radius: 72px 14px 72px 14px;
+  }
+  .shape-pebble {
+    border-radius: 34px 68px 42px 80px / 56px 34px 64px 40px;
+  }
+  .shape-half {
+    border-radius: 999px 999px 0 0;
   }
 
   /* Мягкий «бумажный» шум для плейсхолдеров */

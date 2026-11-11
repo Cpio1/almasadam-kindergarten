@@ -8,14 +8,16 @@ import { tones } from "@/lib/tones";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
-import { AppleArt, BerriesArt, CarrotArt, LeafArt, PlateArt, Wave } from "@/components/ui/Decor";
+import { AppleArt, BerriesArt, CarrotArt, Cloud, Flower, LeafArt, PlateArt, Squiggle, Wave } from "@/components/ui/Decor";
 
 export function Food() {
   const { t } = useI18n();
 
   return (
-    <section id="food" aria-labelledby="food-title" className="section-clip relative bg-milk">
-      <div className="container-site section-y !pt-8 lg:!pt-8">
+    <section id="food" aria-labelledby="food-title" className="section-clip relative bg-white">
+      <Flower className="absolute -right-6 top-16 hidden w-20 animate-spin-slower opacity-90 lg:block" color="#FBD5D2" center="#FFE326" />
+      <Cloud className="absolute left-[44%] top-8 hidden w-28 animate-drift lg:block" color="#EAF7FE" />
+      <div className="container-site section-y relative !pt-8 lg:!pt-8">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
             <SectionHeading
@@ -67,8 +69,11 @@ export function Food() {
           </div>
 
           {/* Временная линия приёмов пищи */}
-          <Reveal delay={0.05}>
-            <div className="relative rounded-[36px] bg-white p-6 shadow-soft ring-1 ring-violet-50 sm:p-8 lg:rounded-[40px_40px_40px_14px] lg:p-7">
+          <Reveal delay={0.05} className="relative">
+            {/* мягкая органическая подложка за карточкой */}
+            <div aria-hidden="true" className="absolute -inset-3 -z-0 hidden animate-morph bg-leaf-50 sm:block lg:-inset-5" />
+            <Squiggle className="absolute -bottom-5 left-8 z-10 w-24 animate-wiggle" color="#FFE326" />
+            <div className="relative rounded-[32px] bg-white p-5 shadow-soft ring-1 ring-violet-50 sm:p-7 lg:p-6">
               <h3 className="text-[1.2rem] font-extrabold lg:text-[1.1rem]">{t.food.timelineTitle}</h3>
               <ol className="relative mt-6 lg:mt-4">
                 <span
@@ -103,7 +108,7 @@ export function Food() {
                   );
                 })}
               </ol>
-              <p className="mt-5 flex items-start gap-2 text-[0.9rem] lg:mt-4 lg:text-[0.85rem] text-ink-soft">
+              <p className="mt-4 flex items-start gap-2 text-[0.85rem] text-ink-soft">
                 <Info className="mt-0.5 size-4 shrink-0 text-leaf-700" aria-hidden="true" />
                 {t.food.note}
               </p>
@@ -111,7 +116,7 @@ export function Food() {
           </Reveal>
         </div>
       </div>
-      <Wave fill="#FFFFFF" />
+      <Wave fill="#FFFCF5" />
     </section>
   );
 }

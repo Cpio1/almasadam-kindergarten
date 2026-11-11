@@ -29,11 +29,14 @@ export function whatsappLink(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-/** Порядок и якоря разделов. Подписи — в locales/*.ts → nav. */
+/**
+ * Порядок и якоря разделов (Header, мобильное меню, футер). Подписи — в locales/*.ts → nav.
+ * "top" — первый экран (Главная). Изучение языков — часть раздела "programs".
+ */
 export const sections = [
+  "top",
   "about",
   "programs",
-  "languages",
   "food",
   "gallery",
   "news",

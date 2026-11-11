@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { House, BookOpen, Languages, X, Hand, ChevronRight, type LucideIcon } from "lucide-react";
+import { House, BookOpen, UtensilsCrossed, X, Hand, ChevronRight, type LucideIcon } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { whatsappLink, type SectionId } from "@/lib/site";
 import { assets } from "@/lib/assets";
@@ -54,7 +54,7 @@ export function FloatingActions() {
   const actions: { id: SectionId; icon: LucideIcon; label: string; cls: string }[] = [
     { id: "about", icon: House, label: t.helper.actions.about, cls: "bg-berry-50 text-berry-700" },
     { id: "programs", icon: BookOpen, label: t.helper.actions.programs, cls: "bg-sky-50 text-sky-700" },
-    { id: "languages", icon: Languages, label: t.helper.actions.languages, cls: "bg-leaf-50 text-leaf-700" },
+    { id: "food", icon: UtensilsCrossed, label: t.helper.actions.food, cls: "bg-leaf-50 text-leaf-700" },
   ];
 
   const avatar = assets.mascot.welcome;

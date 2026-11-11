@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { Cube, Sparkle } from "@/components/ui/Decor";
+import { Arch, Cube, Flower, Ring, Sparkle } from "@/components/ui/Decor";
 
 const twoGisUrl = "https://2gis.kz/almaty/search/" + encodeURIComponent("Рудаки 95");
 
@@ -23,7 +23,7 @@ export function Contacts() {
   ];
 
   return (
-    <section id="contacts" aria-labelledby="contacts-title" className="section-clip relative bg-white">
+    <section id="contacts" aria-labelledby="contacts-title" className="section-clip relative bg-milk">
       <div className="container-site section-y !pt-8 lg:!pt-8">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
@@ -50,7 +50,8 @@ export function Contacts() {
               </a>
             </Reveal>
 
-            <div className="mt-6 hidden pl-2 lg:block">
+            <div className="relative mt-6 hidden w-fit pl-2 lg:block">
+              <Arch className="absolute bottom-0 left-[4%] w-[86%]" color="#DFF2C4" />
               <MascotFigure
                 pose="contact"
                 variant="calm"
@@ -66,6 +67,8 @@ export function Contacts() {
           <Reveal delay={0.05} className="relative">
             <Cube className="absolute -right-2 -top-6 z-10 w-14 animate-float lg:w-11 [--r:12deg]" color="#FFE326" />
             <Sparkle className="absolute -left-3 bottom-10 z-10 w-6 animate-twinkle" color="#159FE2" />
+            <Ring className="absolute -bottom-8 -right-8 hidden w-32 animate-spin-slower opacity-70 sm:block" color="#CDECFB" />
+            <Flower className="absolute -left-7 top-[30%] z-10 hidden w-12 animate-wiggle lg:block" color="#E83A32" center="#FFE326" />
             <div className="relative overflow-hidden rounded-[36px] bg-violet p-3 shadow-lift sm:p-4 lg:rounded-[40px_40px_14px_40px] lg:p-3.5">
               <ul className="grid gap-2.5 sm:gap-3 lg:gap-2.5">
                 {rows.map(({ icon: Icon, label, value, href, tone, external }) => {
@@ -114,7 +117,8 @@ export function Contacts() {
             </div>
           </Reveal>
 
-          <div className="flex justify-center pr-24 lg:hidden">
+          <div className="relative mx-auto w-fit pr-24 lg:hidden">
+            <Arch className="absolute bottom-0 left-[2%] w-[56%]" color="#DFF2C4" />
             <MascotFigure
               pose="contact"
               variant="calm"

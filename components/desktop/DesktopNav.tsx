@@ -6,8 +6,12 @@ import { ChevronDown } from "lucide-react";
 import { sections, type SectionId } from "@/lib/site";
 import { useI18n } from "@/lib/i18n";
 
-/** Пункты, которые на ноутбуках (1024–1439px) уходят в меню «Ещё» */
-const overflowIds: SectionId[] = ["gallery", "news", "contacts"];
+/**
+ * Пункты в меню «Ещё»: на ноутбуках (1024–1439px) — галерея, новости, контакты;
+ * на широких экранах (≥1440px) — только новости и контакты (длинные подписи не помещаются в строку).
+ */
+const overflowLaptop: SectionId[] = ["gallery", "news", "contacts"];
+const overflowWide: SectionId[] = ["news", "contacts"];
 
 export function DesktopNav({
   active,
@@ -35,11 +39,11 @@ export function DesktopNav({
   }, [moreOpen]);
 
   const linkCls = (id: string) =>
-    `relative min-h-11 items-center whitespace-nowrap rounded-full px-3 font-display text-[0.95rem] font-bold transition-colors xl:px-3.5 ${
+    `relative min-h-11 items-center whitespace-nowrap rounded-full px-2.5 font-display text-[0.93rem] font-bold transition-colors xl:px-3 ${
       active === id ? "text-violet" : "text-ink/75 hover:text-violet"
     }`;
 
-  const moreActive = active !== null && overflowIds.includes(active as SectionId);
+  const moreActive = active !== null && overflowLaptop.includes(active as SectionId);
 
   return (
     <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
@@ -52,7 +56,13 @@ export function DesktopNav({
             onNavigate(id);
           }}
           aria-current={active === id ? "true" : undefined}
-          className={`${linkCls(id)} ${overflowIds.includes(id) ? "hidden min-[1440px]:inline-flex" : "inline-flex"}`}
+          className={`${linkCls(id)} ${
+            overflowWide.includes(id)
+              ? "hidden"
+              : overflowLaptop.includes(id)
+                ? "hidden min-[1440px]:inline-flex"
+                : "inline-flex"
+          }`}
         >
           {t.nav[id]}
           {active === id ? (
@@ -65,7 +75,7 @@ export function DesktopNav({
         </a>
       ))}
 
-      <div ref={moreRef} className="relative min-[1440px]:hidden">
+      <div ref={moreRef} className="relative">
         <button
           type="button"
           aria-expanded={moreOpen}
@@ -88,8 +98,8 @@ export function DesktopNav({
               transition={{ duration: 0.16 }}
               className="absolute left-1/2 top-[calc(100%+10px)] w-52 -translate-x-1/2 rounded-3xl bg-white p-2 shadow-lift ring-1 ring-violet-100"
             >
-              {overflowIds.map((id) => (
-                <li key={id}>
+              {overflowLaptop.map((id) => (
+                <li key={id} className={overflowWide.includes(id) ? "" : "min-[1440px]:hidden"}>
                   <a
                     href={`#${id}`}
                     onClick={(e) => {

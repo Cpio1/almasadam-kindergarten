@@ -9,21 +9,21 @@ import { assets } from "@/lib/assets";
 import { galleryConfig, GALLERY_PAGE_SIZE } from "@/data/gallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
-import { Wave } from "@/components/ui/Decor";
+import { Ring, SoftStar, Squiggle, Wave } from "@/components/ui/Decor";
 import { Lightbox } from "@/components/gallery/Lightbox";
 import type { GalleryPhoto } from "@/components/gallery/types";
 import type { ProgramTone } from "@/data/programs";
 
-/** Чередование «необычных» скруглений карточек */
+/** Чередование форм фотографий: арка, круг/овал, клякса, лист, галька… */
 const shapes = [
-  "rounded-[32px_32px_32px_10px]",
-  "rounded-[999px_999px_28px_28px]",
-  "rounded-[10px_32px_32px_32px]",
+  "shape-arch",
   "rounded-[32px]",
-  "rounded-[32px_10px_32px_32px]",
-  "rounded-[28px_28px_999px_999px]",
+  "shape-blob",
+  "shape-leaf",
+  "rounded-full",
+  "shape-arch-down",
+  "shape-pebble",
   "rounded-[32px_32px_10px_32px]",
-  "rounded-[40px_16px]",
 ];
 
 /** Заглушки: разная высота для живой мозаики */
@@ -63,8 +63,11 @@ export function Gallery() {
   const hasPhotos = photos.length > 0;
 
   return (
-    <section id="gallery" aria-labelledby="gallery-title" className="section-clip relative bg-white">
-      <div className="container-site section-y !pt-8 lg:!pt-8">
+    <section id="gallery" aria-labelledby="gallery-title" className="section-clip relative bg-milk">
+      <SoftStar className="absolute left-[8%] top-14 w-10 animate-wiggle [--r:-10deg] lg:w-12" color="#FFE326" />
+      <Ring className="absolute -right-8 top-24 hidden w-28 animate-drift opacity-60 sm:block" color="#CDECFB" />
+      <Squiggle className="absolute bottom-24 left-[-1rem] hidden w-28 animate-drift lg:block" color="#FBD5D2" />
+      <div className="container-site section-y relative !pt-8 lg:!pt-8">
         <SectionHeading
           id="gallery-title"
           eyebrow={t.gallery.eyebrow}
@@ -152,7 +155,7 @@ export function Gallery() {
           </div>
         )}
       </div>
-      <Wave fill="#FFFCF5" variant={1} />
+      <Wave fill="#FFFFFF" variant={1} />
     </section>
   );
 }

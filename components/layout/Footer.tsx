@@ -13,7 +13,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="section-clip relative bg-white text-white">
+    <footer className="section-clip relative bg-milk text-white">
       <Wave fill="#302079" />
       <div className="relative bg-violet">
         <Sparkle className="absolute right-[10%] top-10 w-6 animate-twinkle" color="#FFE326" />

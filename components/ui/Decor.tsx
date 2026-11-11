@@ -99,6 +99,90 @@ export function Cloud({ className = "", style, color = "#fff" }: DecorProps) {
   );
 }
 
+/** Звезда с мягкими (скруглёнными) углами */
+export function SoftStar({ className = "", style, color = "#FFE326" }: DecorProps) {
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      <path
+        d="M50 12 61 37 88 39 67 57 74 84 50 69 26 84 33 57 12 39 39 37Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="14"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** Арка (ворота) — сплошная или контурная */
+export function Arch({ className = "", style, color = "#CDECFB", outline = false }: DecorProps & { outline?: boolean }) {
+  return (
+    <svg viewBox="0 0 100 120" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      {outline ? (
+        <path d="M14 120V56a36 36 0 0 1 72 0v64" fill="none" stroke={color} strokeWidth="12" strokeLinecap="round" />
+      ) : (
+        <path d="M0 120V50a50 50 0 0 1 100 0v70Z" fill={color} />
+      )}
+    </svg>
+  );
+}
+
+/** Полукруг */
+export function HalfCircle({ className = "", style, color = "#FFE326" }: DecorProps) {
+  return (
+    <svg viewBox="0 0 100 50" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      <path d="M0 50a50 50 0 0 1 100 0Z" fill={color} />
+    </svg>
+  );
+}
+
+/** Кольцо */
+export function Ring({ className = "", style, color = "#159FE2" }: DecorProps) {
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      <circle cx="50" cy="50" r="38" fill="none" stroke={color} strokeWidth="14" />
+    </svg>
+  );
+}
+
+/** Волнистая линия-«змейка» */
+export function Squiggle({ className = "", style, color = "#80C924" }: DecorProps) {
+  return (
+    <svg viewBox="0 0 120 30" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      <path
+        d="M6 15c9-12 18-12 27 0s18 12 27 0 18-12 27 0 18 12 27 0"
+        fill="none"
+        stroke={color}
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/** Цветок из шести лепестков */
+export function Flower({ className = "", style, color = "#E83A32", center = "#FFE326" }: DecorProps & { center?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      {[0, 60, 120, 180, 240, 300].map((a) => (
+        <ellipse key={a} cx="50" cy="27" rx="15" ry="22" fill={color} transform={`rotate(${a} 50 50)`} />
+      ))}
+      <circle cx="50" cy="50" r="15" fill={center} />
+    </svg>
+  );
+}
+
+/** Точечная сетка-акцент */
+export function DotGrid({ className = "", style, color = "#302079" }: DecorProps) {
+  return (
+    <svg viewBox="0 0 60 60" aria-hidden="true" className={`pointer-events-none ${className}`} style={style}>
+      {Array.from({ length: 16 }, (_, i) => (
+        <circle key={i} cx={7.5 + (i % 4) * 15} cy={7.5 + Math.floor(i / 4) * 15} r="3.2" fill={color} />
+      ))}
+    </svg>
+  );
+}
+
 /**
  * Волнообразный разделитель между секциями.
  * fill — цвет СЛЕДУЮЩЕЙ (или предыдущей при flip) секции.
