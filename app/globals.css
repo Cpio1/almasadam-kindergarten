@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/* ───────────── Дизайн-токены ALMASADAM ───────────── */
+@theme {
+  --color-violet: #302079;
+  --color-violet-700: #3d2a94;
+  --color-violet-100: #e5e0fa;
+  --color-violet-50: #f3f0fd;
+
+  --color-leaf: #80c924;
+  --color-leaf-700: #4f8a0c;
+  --color-leaf-100: #dff2c4;
+  --color-leaf-50: #f1f9e5;
+
+  --color-sky: #159fe2;
+  --color-sky-700: #0b6fa3;
+  --color-sky-100: #cdecfb;
+  --color-sky-50: #eaf7fe;
+
+  --color-sun: #ffe326;
+  --color-sun-700: #8a6d00;
+  --color-sun-100: #fff4a8;
+  --color-sun-50: #fffbdc;
+
+  --color-berry: #e83a32;
+  --color-berry-700: #b9231c;
+  --color-berry-100: #fbd5d2;
+  --color-berry-50: #fdeeed;
+
+  --color-milk: #fffcf5;
+  --color-cream: #fbf4e4;
+  --color-ink: #25233b;
+  --color-ink-soft: #5b5873;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-700: #128c4a;
+
+  --font-display: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-soft: 0 10px 30px -12px rgb(48 32 121 / 0.18);
+  --shadow-lift: 0 22px 50px -18px rgb(48 32 121 / 0.32);
+  --shadow-pop: 0 6px 0 0 rgb(48 32 121 / 0.12);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.6s ease-in-out infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--r, 0deg));
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--r, 0deg));
+    }
+  }
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.82) rotate(18deg);
+    }
+  }
+}
+
+/* ───────────── База ───────────── */
+:root {
+  /* Сайт всегда светлый — независимо от системной темы */
+  color-scheme: light only;
+  --header-h: 68px;
+  --gutter: 16px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --gutter: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 80px;
+    --gutter: 40px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--color-milk);
+}
+
+body {
+  background: var(--color-milk);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@supports (overflow: clip) {
+  body {
+    overflow-x: clip;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--color-violet);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Заголовки разделов не прячутся под фиксированной шапкой */
+section[id],
+[data-anchor] {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+::selection {
+  background: var(--color-sun-100);
+  color: var(--color-violet);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sky);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Защита от «мигания» русского текста, если сохранён казахский язык */
+html.i18n-pending main,
+html.i18n-pending header,
+html.i18n-pending footer {
+  opacity: 0;
+}
+
+/* ───────────── Компоненты ───────────── */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .section-y {
+    padding-block: clamp(64px, 9vw, 120px);
+  }
+
+  .section-clip {
+    position: relative;
+    overflow-x: hidden;
+  }
+  @supports (overflow: clip) {
+    .section-clip {
+      overflow-x: clip;
+    }
+  }
+
+  .h-display {
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.35rem);
+    font-weight: 900;
+  }
+  .h-section {
+    font-size: clamp(1.75rem, 1.25rem + 2vw, 2.85rem);
+    font-weight: 900;
+  }
+  .text-lead {
+    font-size: clamp(1rem, 0.94rem + 0.3vw, 1.175rem);
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 52px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
+  }
+  .btn-wa {
+    background: var(--color-whatsapp-700);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgb(18 140 74 / 0.7);
+  }
+  .btn-wa:hover {
+    background: #0f7a40;
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--color-violet);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgb(48 32 121 / 0.6);
+  }
+  .btn-primary:hover {
+    background: var(--color-violet-700);
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    background: #fff;
+    color: var(--color-violet);
+    box-shadow: inset 0 0 0 2px var(--color-violet-100);
+  }
+  .btn-ghost:hover {
+    box-shadow: inset 0 0 0 2px var(--color-violet);
+    transform: translateY(-2px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Hero: одна разметка — две самостоятельные композиции (мобильная / десктопная) */
+  .hero-grid {
+    --hero-media-max-h: min(62svh, 480px);
+    --hero-media-ar: 1.11;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "badge" "title" "sub" "cta" "media" "perks";
+  }
+  .hero-grid > [data-area="badge"] { grid-area: badge; }
+  .hero-grid > [data-area="title"] { grid-area: title; }
+  .hero-grid > [data-area="sub"] { grid-area: sub; }
+  .hero-grid > [data-area="cta"] { grid-area: cta; }
+  .hero-grid > [data-area="media"] { grid-area: media; }
+  .hero-grid > [data-area="perks"] { grid-area: perks; }
+
+  @media (min-width: 1024px) {
+    .hero-grid {
+      --hero-media-max-h: min(calc(100svh - var(--header-h) - 96px), 620px);
+      --hero-media-ar: 0.96;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: 1fr auto auto auto auto auto 1fr;
+      grid-template-areas:
+        ".     media"
+        "badge media"
+        "title media"
+        "sub   media"
+        "cta   media"
+        "perks media"
+        ".     media";
+      column-gap: clamp(32px, 4vw, 72px);
+    }
+  }
+  @media (min-width: 1024px) and (max-height: 820px) {
+    .hero-grid {
+      --hero-media-max-h: max(420px, calc(100svh - var(--header-h) - 72px));
+    }
+  }
+
+  /* Мягкий «бумажный» шум для плейсхолдеров */
+  .dots-bg {
+    background-image: radial-gradient(rgb(48 32 121 / 0.09) 1.2px, transparent 1.3px);
+    background-size: 18px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
