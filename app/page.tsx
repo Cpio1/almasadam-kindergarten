@@ -11,10 +11,12 @@ import { Food } from "@/components/sections/Food";
 import { Gallery } from "@/components/sections/Gallery";
 import { News } from "@/components/sections/News";
 import { Contacts } from "@/components/sections/Contacts";
+import { ClipDefs } from "@/components/ui/Fun";
 
 export default function HomePage() {
   return (
     <Providers>
+      <ClipDefs />
       <SkipLink />
       <Header />
       <LangFade>

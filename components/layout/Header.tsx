@@ -40,7 +40,7 @@ export function Header() {
         className={`sticky top-0 z-50 h-[var(--header-h)] transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
           scrolled
             ? "bg-white/88 shadow-[0_8px_30px_-14px_rgba(48,32,121,0.28)] backdrop-blur-xl"
-            : "bg-milk"
+            : "bg-sky-100"
         }`}
       >
         <div className="container-site flex h-full items-center justify-between gap-4">

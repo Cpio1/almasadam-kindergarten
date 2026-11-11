@@ -293,7 +293,7 @@ html.i18n-pending footer {
   .btn-wa {
     background: var(--color-whatsapp-700);
     color: #fff;
-    box-shadow: 0 10px 24px -10px rgb(18 140 74 / 0.7);
+    box-shadow: 0 5px 0 #0b5c30, 0 14px 24px -12px rgb(18 140 74 / 0.7);
   }
   .btn-wa:hover {
     background: #0f7a40;
@@ -302,7 +302,7 @@ html.i18n-pending footer {
   .btn-primary {
     background: var(--color-violet);
     color: #fff;
-    box-shadow: 0 10px 24px -10px rgb(48 32 121 / 0.6);
+    box-shadow: 0 5px 0 #1b1150, 0 14px 24px -12px rgb(48 32 121 / 0.6);
   }
   .btn-primary:hover {
     background: var(--color-violet-700);

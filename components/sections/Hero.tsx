@@ -6,9 +6,10 @@ import { useI18n } from "@/lib/i18n";
 import { whatsappLink } from "@/lib/site";
 import { scrollToSection } from "@/lib/hooks";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { Arch, Cube, Glow, Ring, SoftStar, Sparkle, Wave } from "@/components/ui/Decor";
+import { Arch, Cube, Glow, Ring, SoftStar, Sparkle } from "@/components/ui/Decor";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { HeroVideo } from "@/components/hero/HeroVideo";
+import { Balloon, Divider, PuffCloud, Rainbow, SunBurst } from "@/components/ui/Fun";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const fadeUp = (delay: number) => ({
@@ -33,7 +34,13 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="section-clip relative bg-milk">
+    <section id="top" aria-labelledby="hero-title" className="section-clip relative bg-[linear-gradient(180deg,#cdecfb_0%,#e6f6fe_50%,#fff3b0_100%)]">
+      {/* сказочное небо: солнце, облака, шарики */}
+      <SunBurst face className="absolute -left-10 -top-8 w-32 opacity-95 lg:left-[2%] lg:top-2 lg:w-36" />
+      <PuffCloud className="absolute left-[30%] top-6 hidden w-36 animate-drift lg:block" />
+      <PuffCloud className="absolute -right-6 bottom-24 w-24 animate-drift [animation-delay:-5s] sm:w-32" />
+      <Balloon className="absolute bottom-16 left-[3%] hidden w-12 animate-float-slow lg:block" color="#E83A32" />
+      <Balloon className="absolute bottom-24 left-[7%] hidden w-10 animate-float [animation-delay:-2s] lg:block" color="#159FE2" />
       {/* фоновая подсветка */}
       <Glow className="-left-32 top-10 size-[340px] opacity-35 lg:size-[440px]" color="#FFE326" />
       <Glow className="-right-24 top-1/3 size-[300px] opacity-25 lg:size-[380px]" color="#159FE2" />
@@ -99,6 +106,8 @@ export function Hero() {
           </motion.div>
 
           <div data-area="media" className="relative isolate mt-10 lg:mt-0 lg:self-center">
+            {/* радуга за видео */}
+            <Rainbow className="absolute -top-16 left-1/2 -z-10 w-[118%] max-w-[640px] -translate-x-1/2 sm:-top-24" />
             {/* фигуры частично за видео */}
             <Arch className="absolute -right-3 -top-5 -z-10 w-24 animate-wiggle [--r:8deg] sm:w-32 lg:-right-8 lg:-top-7 lg:w-40" color="#FFE326" />
             <Ring className="absolute -bottom-6 right-[12%] -z-10 hidden w-24 animate-spin-slower sm:block" color="#80C924" />
@@ -115,7 +124,7 @@ export function Hero() {
                 delay={0.25}
                 say={t.hero.mascotSay}
                 bubbleClassName="hidden sm:block"
-                className="w-[clamp(118px,33vw,164px)] lg:w-[clamp(188px,14vw,216px)]"
+                className="w-[clamp(124px,35vw,176px)] lg:w-[clamp(220px,17vw,270px)]"
                 sizes="(max-width: 1024px) 180px, 270px"
                 priority
               />
@@ -147,7 +156,7 @@ export function Hero() {
         </div>
       </div>
 
-      <Wave fill="#FFFFFF" />
+      <Divider fill="#FFFFFF" kind="clouds" />
     </section>
   );
 }
