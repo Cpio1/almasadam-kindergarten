@@ -5,7 +5,7 @@ import { BadgeCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { assets } from "@/lib/assets";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Mascot } from "@/components/ui/Mascot";
+import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { Cube, Glow, Sparkle, Wave } from "@/components/ui/Decor";
 
@@ -52,14 +52,14 @@ export function Languages() {
   const { t } = useI18n();
   return (
     <section id="languages" aria-labelledby="languages-title" className="section-clip relative bg-violet text-white">
-      <Glow className="-left-40 top-20 size-[420px] opacity-25" color="#159FE2" />
-      <Glow className="-right-40 bottom-10 size-[420px] opacity-20" color="#E83A32" />
+      <Glow className="-left-40 top-20 size-[420px] opacity-25 lg:size-[360px]" color="#159FE2" />
+      <Glow className="-right-40 bottom-10 size-[420px] opacity-20 lg:size-[360px]" color="#E83A32" />
       <Sparkle className="absolute left-[46%] top-12 w-6 animate-twinkle" color="#FFE326" />
       <Sparkle className="absolute bottom-24 left-[8%] w-4 animate-twinkle [animation-delay:1.2s]" color="#fff" />
-      <Cube className="absolute -right-4 top-24 hidden w-16 animate-float-slow [--r:12deg] sm:block" color="#FFE326" />
+      <Cube className="absolute -right-4 top-24 hidden w-16 animate-float-slow [--r:12deg] sm:block lg:w-12" color="#FFE326" />
 
-      <div className="container-site section-y relative !pt-8 lg:!pt-12">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14 xl:gap-20">
+      <div className="container-site section-y relative !pt-8 lg:!pt-8">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12 xl:gap-16">
           <div>
             <SectionHeading
               id="languages-title"
@@ -70,18 +70,21 @@ export function Languages() {
               invert
             />
 
-            <Reveal delay={0.1} className="relative mx-auto mt-10 w-[250px] sm:w-[300px] lg:mx-0 lg:ml-10 lg:w-[340px]">
+            <div className="relative mx-auto mt-10 w-[clamp(250px,72vw,300px)] lg:mx-0 lg:ml-6 lg:mt-6 lg:w-[clamp(290px,22vw,360px)]">
               {/* У реального Адама таблички RU / KZ / EN уже в руках — декоративные нужны только для заглушки */}
               {assets.mascot.languages ? null : <LetterTiles />}
-              <Mascot
+              <MascotFigure
                 pose="languages"
-                className="mx-auto w-[170px] sm:w-[210px] lg:w-[270px]"
-                sizes="(max-width: 1024px) 220px, 280px"
+                variant="sway"
+                size="custom"
+                delay={0.15}
+                className="mx-auto w-[clamp(196px,56vw,244px)] lg:w-[clamp(250px,19vw,316px)]"
+                sizes="(max-width: 1024px) 250px, 320px"
               />
-            </Reveal>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-4 lg:gap-5">
+          <div className="flex flex-col gap-4 lg:gap-3.5">
             {langs.map(({ key, glyph, lang, accent, soft, chip, shift }, i) => {
               const item = t.languages.items[key];
               return (
@@ -91,33 +94,34 @@ export function Languages() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "0px 0px -10% 0px" }}
                   transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className={`group relative flex gap-4 rounded-[28px] bg-white p-4 text-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-translate-y-1 sm:gap-5 sm:p-5 lg:max-w-[560px] ${shift} ${
+                  className={`group relative flex gap-4 rounded-[28px] bg-white p-4 text-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-translate-y-1 sm:gap-5 sm:p-5 lg:max-w-[530px] lg:gap-4 lg:p-4 ${shift} ${
                     i === 1 ? "rounded-tl-[8px]" : i === 2 ? "rounded-br-[8px]" : "rounded-bl-[8px]"
                   }`}
                 >
                   <span
                     aria-hidden="true"
                     lang={lang}
-                    className={`grid size-[68px] shrink-0 place-items-center rounded-[22px] font-display text-[1.9rem] font-black text-white transition-transform duration-300 group-hover:-rotate-6 sm:size-20 sm:text-[2.2rem] ${accent}`}
+                    style={{ animationDelay: `${i * 0.8}s` }}
+                    className={`grid size-[68px] shrink-0 animate-bob place-items-center rounded-[22px] font-display text-[1.9rem] font-black text-white transition-transform duration-300 group-hover:-rotate-6 sm:size-20 sm:text-[2.2rem] lg:size-16 lg:rounded-[18px] lg:text-[1.8rem] ${accent}`}
                   >
                     {glyph}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <h3 lang={lang} className="text-[1.25rem] font-black sm:text-[1.35rem]">
+                      <h3 lang={lang} className="text-[1.25rem] font-black sm:text-[1.35rem] lg:text-[1.2rem]">
                         {item.label}
                       </h3>
                       <span className={`rounded-full px-2.5 py-0.5 text-[0.78rem] font-bold ${soft} ${chip}`}>
                         {item.tag}
                       </span>
                     </div>
-                    <p className="mt-1 text-[0.97rem] text-ink-soft">{item.text}</p>
-                    <ul className="mt-3 flex flex-wrap gap-1.5" aria-hidden="true">
+                    <p className="mt-1 text-[0.97rem] text-ink-soft lg:mt-0.5 lg:text-[0.93rem]">{item.text}</p>
+                    <ul className="mt-3 flex flex-wrap gap-1.5 lg:mt-2" aria-hidden="true">
                       {item.words.map((w) => (
                         <li
                           key={w}
                           lang={lang}
-                          className={`rounded-[12px_12px_12px_4px] px-2.5 py-1 font-display text-[0.85rem] font-extrabold ${soft} ${chip}`}
+                          className={`rounded-[12px_12px_12px_4px] px-2.5 py-1 font-display text-[0.85rem] font-extrabold lg:py-0.5 lg:text-[0.8rem] ${soft} ${chip}`}
                         >
                           {w}
                         </li>
@@ -129,7 +133,7 @@ export function Languages() {
             })}
 
             <Reveal delay={0.2}>
-              <p className="mt-2 inline-flex items-start gap-2.5 rounded-[20px] bg-white/10 px-4 py-3 font-display text-[0.98rem] font-bold text-white ring-1 ring-white/15">
+              <p className="mt-2 inline-flex items-start gap-2.5 rounded-[20px] bg-white/10 px-4 py-3 font-display text-[0.98rem] lg:py-2.5 lg:text-[0.93rem] font-bold text-white ring-1 ring-white/15">
                 <BadgeCheck className="mt-0.5 size-5 shrink-0 text-sun" aria-hidden="true" />
                 {t.languages.primaryNote}
               </p>

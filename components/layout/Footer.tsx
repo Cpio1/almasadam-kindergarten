@@ -19,7 +19,7 @@ export function Footer() {
         <Sparkle className="absolute right-[10%] top-10 w-6 animate-twinkle" color="#FFE326" />
         <Cube className="absolute -left-4 bottom-24 hidden w-14 opacity-90 animate-float-slow [--r:-10deg] lg:block" color="#159FE2" />
 
-        <div className="container-site grid gap-10 pb-10 pt-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1.1fr] lg:gap-14 lg:pb-14 lg:pt-10">
+        <div className="container-site grid gap-10 pb-10 pt-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1.1fr] lg:gap-12 lg:pb-10 lg:pt-6">
           <div className="sm:col-span-2 lg:col-span-1">
             <span className="inline-flex rounded-[20px] bg-white px-4 py-3">
               <Logo className="h-10" />

@@ -35,11 +35,11 @@ export function SectionHeading({
         </span>
         {eyebrow}
       </span>
-      <h2 id={id} className={`h-section mt-4 ${invert ? "!text-white" : ""}`}>
+      <h2 id={id} className={`h-section mt-4 lg:mt-3 ${invert ? "!text-white" : ""}`}>
         {title}
       </h2>
       {subtitle ? (
-        <p className={`text-lead mt-4 ${center ? "mx-auto" : ""} ${invert ? "!text-white/80" : ""}`}>
+        <p className={`text-lead mt-4 lg:mt-3 ${center ? "mx-auto" : ""} ${invert ? "!text-white/80" : ""}`}>
           {subtitle}
         </p>
       ) : null}

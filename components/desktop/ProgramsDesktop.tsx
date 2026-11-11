@@ -9,18 +9,18 @@ import { Blob } from "@/components/ui/Decor";
 /** Асимметричная мозаика 12 колонок: ширины карточек чередуются 5-4-3 / 3-4-5 */
 const spans = ["col-span-5", "col-span-4", "col-span-3", "col-span-3", "col-span-4", "col-span-5"];
 const shapes = [
-  "rounded-[48px_48px_48px_16px]",
-  "rounded-[16px_48px_48px_48px]",
-  "rounded-[48px_16px_48px_48px]",
-  "rounded-[48px_48px_16px_48px]",
-  "rounded-[48px_48px_48px_48px]",
-  "rounded-[16px_48px_48px_48px]",
+  "rounded-[40px_40px_40px_14px]",
+  "rounded-[14px_40px_40px_40px]",
+  "rounded-[40px_14px_40px_40px]",
+  "rounded-[40px_40px_14px_40px]",
+  "rounded-[40px]",
+  "rounded-[14px_40px_40px_40px]",
 ];
 
 export function ProgramsDesktop() {
   const { t } = useI18n();
   return (
-    <ul className="hidden grid-cols-12 gap-5 lg:grid">
+    <ul className="hidden grid-cols-12 gap-4 lg:grid">
       {programs.map(({ id, icon: Icon, tone }, i) => {
         const c = tones[tone];
         const item = t.programs.items[id];
@@ -36,31 +36,31 @@ export function ProgramsDesktop() {
             <motion.article
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className={`group relative flex h-full min-h-[236px] flex-col overflow-hidden p-7 xl:p-8 ${c.soft} ${shapes[i % shapes.length]}`}
+              className={`group relative flex h-full min-h-[196px] flex-col overflow-hidden p-6 xl:p-7 ${c.soft} ${shapes[i % shapes.length]}`}
             >
               <Blob
                 variant={(i % 3) as 0 | 1 | 2}
                 color="#ffffff"
-                className="absolute -right-10 -top-10 w-44 opacity-70 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
+                className="absolute -right-10 -top-10 w-36 opacity-70 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
               />
               <span
                 aria-hidden="true"
-                className={`absolute bottom-3 right-6 font-display text-[5.5rem] font-black leading-none opacity-[0.08] ${c.text}`}
+                className={`absolute bottom-2 right-5 font-display text-[4.5rem] font-black leading-none opacity-[0.08] ${c.text}`}
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span
-                className={`relative grid size-14 place-items-center rounded-[18px] ${c.solid} shadow-pop transition-transform duration-300 group-hover:-rotate-6`}
+                className={`relative grid size-12 place-items-center rounded-[16px] ${c.solid} shadow-pop transition-transform duration-300 group-hover:-rotate-6`}
               >
                 <Icon
-                  className={`size-7 ${tone === "sun" ? "text-violet" : "text-white"}`}
+                  className={`size-6 ${tone === "sun" ? "text-violet" : "text-white"}`}
                   aria-hidden="true"
                 />
               </span>
-              <h3 className="relative mt-auto pt-8 text-[1.3rem] font-extrabold xl:text-[1.4rem]">
+              <h3 className="relative mt-auto pt-6 text-[1.15rem] font-extrabold xl:text-[1.25rem]">
                 {item.title}
               </h3>
-              <p className="relative mt-2 max-w-[34ch] text-[0.98rem] leading-relaxed text-ink-soft">
+              <p className="relative mt-1.5 max-w-[34ch] text-[0.93rem] leading-relaxed text-ink-soft">
                 {item.text}
               </p>
             </motion.article>

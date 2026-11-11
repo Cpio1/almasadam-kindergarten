@@ -47,7 +47,7 @@ export function HeroVideoPlaceholder({ className = "" }: { className?: string })
       <Cube className="absolute bottom-[20%] right-[12%] w-[14%] animate-float [--r:10deg] [animation-delay:1.1s]" color="#159FE2" letter="B" />
 
       {/* приветствие */}
-      <div className="absolute inset-x-0 top-[40%] flex -translate-y-1/2 flex-col items-center px-6 text-center">
+      <div className="absolute inset-x-0 top-[33%] flex -translate-y-1/2 flex-col items-center px-6 text-center">
         <p className="font-display text-[clamp(1.5rem,1rem+2.4vw,2.6rem)] font-black leading-tight text-white drop-shadow-[0_4px_14px_rgba(20,10,70,0.35)]">
           {t.hero.placeholderTitle}
         </p>

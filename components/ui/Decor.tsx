@@ -123,7 +123,7 @@ export function Wave({
       viewBox="0 0 1200 100"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className={`pointer-events-none block h-[36px] w-full sm:h-[56px] lg:h-[72px] ${
+      className={`pointer-events-none block h-[36px] w-full sm:h-[56px] lg:h-[52px] ${
         flip ? "rotate-180" : ""
       } ${className}`}
     >

@@ -5,7 +5,7 @@ import { MapPin, Phone, Clock3, Map as MapIcon } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { site, whatsappLink } from "@/lib/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Mascot } from "@/components/ui/Mascot";
+import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { Cube, Sparkle } from "@/components/ui/Decor";
@@ -24,8 +24,8 @@ export function Contacts() {
 
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="section-clip relative bg-white">
-      <div className="container-site section-y !pt-8 lg:!pt-12">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+      <div className="container-site section-y !pt-8 lg:!pt-8">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
             <SectionHeading
               id="contacts-title"
@@ -35,7 +35,7 @@ export function Contacts() {
               tone="leaf"
             />
 
-            <Reveal delay={0.1} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Reveal delay={0.1} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-6">
               <a href={whatsappLink(t.waMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-wa">
                 <WhatsAppIcon className="size-5" />
                 {t.contacts.whatsappBtn}
@@ -50,33 +50,41 @@ export function Contacts() {
               </a>
             </Reveal>
 
-            <Reveal delay={0.15} className="mt-10 hidden lg:block">
-              <Mascot pose="contact" say={t.contacts.mascotSay} className="w-[160px]" sizes="170px" />
-            </Reveal>
+            <div className="mt-6 hidden pl-2 lg:block">
+              <MascotFigure
+                pose="contact"
+                variant="calm"
+                size="custom"
+                delay={0.15}
+                say={t.contacts.mascotSay}
+                className="w-[clamp(176px,13vw,224px)]"
+                sizes="230px"
+              />
+            </div>
           </div>
 
           <Reveal delay={0.05} className="relative">
-            <Cube className="absolute -right-2 -top-6 z-10 w-14 animate-float [--r:12deg]" color="#FFE326" />
+            <Cube className="absolute -right-2 -top-6 z-10 w-14 animate-float lg:w-11 [--r:12deg]" color="#FFE326" />
             <Sparkle className="absolute -left-3 bottom-10 z-10 w-6 animate-twinkle" color="#159FE2" />
-            <div className="relative overflow-hidden rounded-[36px] bg-violet p-3 shadow-lift sm:p-4 lg:rounded-[48px_48px_16px_48px]">
-              <ul className="grid gap-2.5 sm:gap-3">
+            <div className="relative overflow-hidden rounded-[36px] bg-violet p-3 shadow-lift sm:p-4 lg:rounded-[40px_40px_14px_40px] lg:p-3.5">
+              <ul className="grid gap-2.5 sm:gap-3 lg:gap-2.5">
                 {rows.map(({ icon: Icon, label, value, href, tone, external }) => {
                   const content = (
                     <>
-                      <span className={`grid size-12 shrink-0 place-items-center rounded-2xl ${tone}`}>
+                      <span className={`grid size-12 shrink-0 place-items-center rounded-2xl lg:size-11 lg:rounded-[14px] ${tone}`}>
                         <Icon className="size-5" />
                       </span>
                       <span className="min-w-0">
                         <span className="block text-[0.82rem] font-bold uppercase tracking-wide text-ink-soft">
                           {label}
                         </span>
-                        <span className="block break-words font-display text-[1.08rem] font-extrabold text-violet sm:text-[1.18rem]">
+                        <span className="block break-words font-display text-[1.08rem] font-extrabold text-violet sm:text-[1.18rem] lg:text-[1.06rem]">
                           {value}
                         </span>
                       </span>
                     </>
                   );
-                  const cls = "flex items-center gap-4 rounded-[24px] bg-white p-4 sm:p-5";
+                  const cls = "flex items-center gap-4 rounded-[24px] bg-white p-4 sm:p-5 lg:gap-3.5 lg:rounded-[20px] lg:px-4 lg:py-3";
                   return (
                     <li key={label}>
                       {href ? (
@@ -107,7 +115,14 @@ export function Contacts() {
           </Reveal>
 
           <div className="flex justify-center pr-24 lg:hidden">
-            <Mascot pose="contact" say={t.contacts.mascotSay} className="w-[120px]" sizes="130px" />
+            <MascotFigure
+              pose="contact"
+              variant="calm"
+              size="custom"
+              say={t.contacts.mascotSay}
+              className="w-[clamp(150px,42vw,184px)]"
+              sizes="190px"
+            />
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ export function Header() {
             aria-label={`ALMASADAM — ${t.common.toTop}`}
             className="flex shrink-0 items-center"
           >
-            <Logo className="h-9 lg:h-11" priority />
+            <Logo className="h-9 lg:h-10" priority />
           </a>
 
           <DesktopNav active={active} onNavigate={scrollToSection} />

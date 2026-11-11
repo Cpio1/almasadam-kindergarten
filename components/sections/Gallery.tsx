@@ -64,7 +64,7 @@ export function Gallery() {
 
   return (
     <section id="gallery" aria-labelledby="gallery-title" className="section-clip relative bg-white">
-      <div className="container-site section-y !pt-8 lg:!pt-12">
+      <div className="container-site section-y !pt-8 lg:!pt-8">
         <SectionHeading
           id="gallery-title"
           eyebrow={t.gallery.eyebrow}
@@ -76,11 +76,11 @@ export function Gallery() {
 
         {hasPhotos ? (
           <>
-            <ul className="mt-10 columns-2 gap-3 sm:columns-3 sm:gap-4 lg:mt-14 lg:columns-4 lg:gap-5">
+            <ul className="mt-10 columns-2 gap-3 sm:columns-3 sm:gap-4 lg:mt-9 lg:columns-4 lg:gap-4">
               {photos.slice(0, visible).map((p, i) => (
                 <motion.li
                   key={p.src}
-                  className="mb-3 break-inside-avoid sm:mb-4 lg:mb-5"
+                  className="mb-3 break-inside-avoid sm:mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -131,10 +131,10 @@ export function Gallery() {
             />
           </>
         ) : (
-          <div className="relative mt-10 lg:mt-14">
-            <ul className="columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4 lg:gap-5" aria-hidden="true">
+          <div className="relative mt-10 lg:mx-auto lg:mt-9 lg:max-w-[1000px]">
+            <ul className="columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4 lg:gap-4" aria-hidden="true">
               {placeholderTiles.map((tile, i) => (
-                <li key={i} className={`mb-3 break-inside-avoid sm:mb-4 lg:mb-5 ${tile.extra ?? ""}`}>
+                <li key={i} className={`mb-3 break-inside-avoid sm:mb-4 ${tile.extra ?? ""}`}>
                   <PhotoSlot
                     photo={null}
                     alt=""

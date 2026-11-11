@@ -8,7 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { news, type NewsItem } from "@/data/news";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Mascot } from "@/components/ui/Mascot";
+import { MascotFigure } from "@/components/ui/MascotFigure";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon } from "@/components/ui/BrandIcons";
@@ -82,24 +82,32 @@ export function News() {
 
   return (
     <section id="news" aria-labelledby="news-title" className="section-clip relative bg-milk">
-      <div className="container-site section-y !pt-8 lg:!pt-12">
+      <div className="container-site section-y !pt-8 lg:!pt-8">
         <SectionHeading id="news-title" eyebrow={t.news.eyebrow} title={t.news.title} tone="sun" />
 
         {sorted.length ? (
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-9 lg:grid-cols-3 lg:gap-5">
             {sorted.map((item, i) => (
               <NewsCard key={item.id} item={item} index={i} />
             ))}
           </div>
         ) : (
-          <Reveal className="mt-10 lg:mt-12">
-            <div className="relative overflow-hidden rounded-[36px] bg-white p-6 shadow-soft ring-1 ring-violet-50 sm:p-10 lg:rounded-[48px_48px_48px_16px] lg:px-14 lg:py-12">
+          <Reveal className="mt-10 lg:mt-9">
+            <div className="relative overflow-hidden rounded-[36px] bg-white p-6 shadow-soft ring-1 ring-violet-50 sm:p-10 lg:rounded-[40px_40px_40px_14px] lg:px-12 lg:py-8">
               <Sparkle className="absolute right-[6%] top-8 w-7 animate-twinkle" color="#FFE326" />
               <Cube className="absolute -bottom-3 right-[30%] hidden w-14 animate-float [--r:-10deg] md:block" color="#159FE2" />
               <div className="flex flex-col items-center gap-8 text-center md:flex-row md:text-left">
-                <Mascot pose="news" className="w-[130px] sm:w-[150px] lg:w-[170px]" sizes="180px" />
+                <MascotFigure
+                  pose="news"
+                  variant="float"
+                  size="custom"
+                  floatIntensity={0.8}
+                  delay={0.1}
+                  className="w-[clamp(150px,44vw,180px)] lg:w-[clamp(160px,12vw,200px)]"
+                  sizes="200px"
+                />
                 <div className="max-w-xl md:pl-6">
-                  <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.65rem)] font-extrabold leading-snug text-violet">
+                  <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.65rem)] lg:text-[1.4rem] font-extrabold leading-snug text-violet">
                     {t.news.empty}
                   </p>
                   <p className="mt-3 text-ink-soft">{t.news.emptyHint}</p>

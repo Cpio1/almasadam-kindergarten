@@ -66,7 +66,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: "#FFFCF5",
-  colorScheme: "light",
+  // "only light" запрещает браузерам (Chrome Auto Dark, Samsung Internet) затемнять сайт
+  colorScheme: "only light",
 };
 
 const jsonLd = {
@@ -105,6 +106,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${nunito.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
+        {/* Сайт всегда светлый: просим расширение Dark Reader не перекрашивать страницу */}
+        <meta name="darkreader-lock" />
         <script dangerouslySetInnerHTML={{ __html: langScript }} />
         <script
           type="application/ld+json"

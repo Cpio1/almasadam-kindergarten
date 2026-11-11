@@ -6,7 +6,7 @@ import { useI18n } from "@/lib/i18n";
 import { assets } from "@/lib/assets";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
-import { Mascot } from "@/components/ui/Mascot";
+import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { Cube, Sparkle, Wave } from "@/components/ui/Decor";
 
@@ -14,9 +14,9 @@ type CardKey = "care" | "play" | "langs" | "schedule";
 
 const cards: { key: CardKey; icon: LucideIcon; bg: string; iconBg: string; shape: string; offset: string }[] = [
   { key: "care", icon: HeartHandshake, bg: "bg-berry-50", iconBg: "bg-berry", shape: "rounded-[32px_32px_32px_10px]", offset: "" },
-  { key: "play", icon: Blocks, bg: "bg-sun-50", iconBg: "bg-sun", shape: "rounded-[10px_32px_32px_32px]", offset: "sm:translate-y-8" },
+  { key: "play", icon: Blocks, bg: "bg-sun-50", iconBg: "bg-sun", shape: "rounded-[10px_32px_32px_32px]", offset: "sm:translate-y-8 lg:translate-y-5" },
   { key: "langs", icon: Languages, bg: "bg-sky-50", iconBg: "bg-sky", shape: "rounded-[32px_10px_32px_32px]", offset: "" },
-  { key: "schedule", icon: CalendarClock, bg: "bg-leaf-50", iconBg: "bg-leaf", shape: "rounded-[32px_32px_10px_32px]", offset: "sm:translate-y-8" },
+  { key: "schedule", icon: CalendarClock, bg: "bg-leaf-50", iconBg: "bg-leaf", shape: "rounded-[32px_32px_10px_32px]", offset: "sm:translate-y-8 lg:translate-y-5" },
 ];
 
 export function About() {
@@ -25,10 +25,10 @@ export function About() {
 
   return (
     <section id="about" aria-labelledby="about-title" className="section-clip relative bg-white">
-      <div className="container-site section-y !pt-10 lg:!pb-16 lg:!pt-16">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16 xl:gap-24">
+      <div className="container-site section-y !pt-10 lg:!pb-12 lg:!pt-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
           {/* Коллаж: на телефоне идёт после текста */}
-          <Reveal className="relative order-2 mx-auto w-full max-w-[520px] lg:order-1">
+          <Reveal className="relative order-2 mx-auto w-full max-w-[520px] lg:order-1 lg:max-w-[440px]">
             <div className="relative aspect-[1/0.92]">
               <PhotoSlot
                 photo={p1}
@@ -45,14 +45,19 @@ export function About() {
                 sizes="260px"
                 className="absolute bottom-0 right-0 aspect-square w-[44%] rounded-full shadow-lift ring-[6px] ring-white"
               />
-              <Cube className="absolute -top-2 right-[14%] w-12 animate-float [--r:12deg] sm:w-14" color="#E83A32" />
+              <Cube className="absolute -top-2 right-[14%] w-12 animate-float [--r:12deg] sm:w-14 lg:w-11" color="#E83A32" />
               <Sparkle className="absolute bottom-[30%] left-[-2%] w-6 animate-twinkle" color="#80C924" />
-              <div className="absolute -bottom-4 left-[2%] sm:left-[6%]">
-                <Mascot
+              {/* Адам «показывает» садик: ширина — доля коллажа, поэтому масштабируется вместе с ним */}
+              <div className="absolute -bottom-6 left-[-3%] w-[40%] sm:w-[42%]">
+                <MascotFigure
                   pose="about"
+                  variant="float"
+                  size="custom"
+                  floatIntensity={0.8}
+                  delay={0.2}
                   say={t.about.mascotSay}
-                  className="w-[96px] sm:w-[124px] lg:w-[160px]"
-                  sizes="140px"
+                  className="w-full"
+                  sizes="(max-width: 1024px) 45vw, 200px"
                 />
               </div>
             </div>
@@ -67,7 +72,7 @@ export function About() {
               tone="berry"
             />
 
-            <ul className="mt-9 grid gap-3 sm:grid-cols-2 sm:gap-4 sm:pb-8">
+            <ul className="mt-9 grid gap-3 sm:grid-cols-2 sm:gap-4 sm:pb-8 lg:mt-7 lg:gap-3.5 lg:pb-5">
               {cards.map(({ key, icon: Icon, bg, iconBg, shape, offset }, i) => (
                 <motion.li
                   key={key}
@@ -78,16 +83,16 @@ export function About() {
                   className={offset}
                 >
                   <div
-                    className={`group flex h-full gap-4 p-5 transition-transform duration-300 hover:-translate-y-1 sm:flex-col sm:gap-3 sm:p-6 ${bg} ${shape}`}
+                    className={`group flex h-full gap-4 p-5 transition-transform duration-300 hover:-translate-y-1 sm:flex-col sm:gap-3 sm:p-6 lg:gap-2.5 lg:p-5 ${bg} ${shape}`}
                   >
                     <span
-                      className={`grid size-12 shrink-0 place-items-center rounded-2xl ${iconBg} transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
+                      className={`grid size-12 shrink-0 place-items-center rounded-2xl lg:size-10 lg:rounded-xl ${iconBg} transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
                     >
-                      <Icon className={`size-6 ${key === "play" ? "text-violet" : "text-white"}`} aria-hidden="true" />
+                      <Icon className={`size-6 lg:size-5 ${key === "play" ? "text-violet" : "text-white"}`} aria-hidden="true" />
                     </span>
                     <div>
-                      <h3 className="text-[1.15rem] font-extrabold">{t.about.cards[key].title}</h3>
-                      <p className="mt-1.5 text-[0.97rem] leading-relaxed text-ink-soft">
+                      <h3 className="text-[1.15rem] font-extrabold lg:text-[1.05rem]">{t.about.cards[key].title}</h3>
+                      <p className="mt-1.5 text-[0.97rem] leading-relaxed text-ink-soft lg:mt-1 lg:text-[0.92rem]">
                         {t.about.cards[key].text}
                       </p>
                     </div>
