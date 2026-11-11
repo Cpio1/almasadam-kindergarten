@@ -120,9 +120,9 @@ export const kz: Dictionary = {
   news: {
     eyebrow: "Оқиғалар",
     title: "Жаңалықтар мен іс-шаралар",
-    empty: "Жақында мұнда жаңалықтар пайда болады",
-    emptyHint: "Әзірге бізді Instagram-да бақылаңыз",
-    instagramCta: "Instagram-ды ашу",
+    promoTitle: "Барлық жарқын сәттер — Instagram-да!",
+    promoText: "Мерекелер, сабақтар және балақайларымыздың бақытты сәттері",
+    promoCta: "Жаңалықтарымызды көру",
     more: "Толығырақ",
     less: "Жасыру",
   },

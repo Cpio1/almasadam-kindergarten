@@ -119,9 +119,9 @@ export const ru = {
   news: {
     eyebrow: "События",
     title: "Новости и мероприятия",
-    empty: "Скоро здесь появятся новости",
-    emptyHint: "А пока — мы в Instagram",
-    instagramCta: "Открыть Instagram",
+    promoTitle: "Все яркие моменты — в Instagram!",
+    promoText: "Праздники, занятия и счастливые моменты наших малышей",
+    promoCta: "Смотреть наши новости",
     more: "Подробнее",
     less: "Свернуть",
   },
