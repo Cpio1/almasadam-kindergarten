@@ -80,7 +80,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={site.mapUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-white">
+                <a href={site.twoGis.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-white">
                   <MapPin className="mt-0.5 size-5 shrink-0 text-sun" aria-hidden="true" />
                   {t.contacts.address}
                 </a>

@@ -1,14 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Menu } from "lucide-react";
 import { sections, whatsappLink, type SectionId } from "@/lib/site";
 import { useI18n } from "@/lib/i18n";
 import { scrollToSection, useActiveSection, useScrolled } from "@/lib/hooks";
 import { Logo } from "@/components/ui/Logo";
 import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { DesktopNav } from "@/components/desktop/DesktopNav";
-import { MobileMenu } from "@/components/mobile/MobileMenu";
+import { BurgerIcon, MobileMenu } from "@/components/mobile/MobileMenu";
 import { LangSwitch } from "./LangSwitch";
 
 export function Header() {
@@ -17,6 +16,7 @@ export function Header() {
   const active = useActiveSection(sections);
   const [menuOpen, setMenuOpen] = useState(false);
   const pending = useRef<SectionId | null>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -70,14 +70,15 @@ export function Header() {
               WhatsApp
             </a>
             <button
+              ref={burgerRef}
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label={t.common.openMenu}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              className="grid size-12 place-items-center rounded-full bg-violet text-white shadow-soft lg:hidden"
+              className="grid size-12 place-items-center rounded-full bg-violet text-white shadow-soft transition-transform active:scale-90 lg:hidden"
             >
-              <Menu className="size-6" aria-hidden="true" />
+              <BurgerIcon open={menuOpen} className="size-6" />
             </button>
           </div>
         </div>
@@ -88,6 +89,7 @@ export function Header() {
         onClose={closeMenu}
         onNavigate={navigateFromMenu}
         active={active}
+        returnFocusRef={burgerRef}
       />
     </>
   );

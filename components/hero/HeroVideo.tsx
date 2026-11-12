@@ -36,7 +36,8 @@ export function HeroVideo({ className = "" }: { className?: string }) {
   const [playing, setPlaying] = useState(false);
   /** Реальное состояние звука — синхронизируется с событием volumechange */
   const [muted, setMuted] = useState(true);
-  const [hasAudio, setHasAudio] = useState(video?.hasAudio ?? false);
+  /** Звуковая дорожка проверяется при сборке (scripts/check-assets.mjs) — без ненадёжных догадок в браузере */
+  const hasAudio = video?.hasAudio ?? false;
   /** Пользователь сам поставил паузу — не возобновляем автоматически */
   const userPaused = useRef(false);
 
@@ -92,31 +93,36 @@ export function HeroVideo({ className = "" }: { className?: string }) {
     }
   };
 
+  /**
+   * Звук: всё синхронно внутри обработчика нажатия — iOS Safari и Android Chrome
+   * разрешают звук только в прямом ответ на жест пользователя.
+   * Видеоэлемент не пересоздаётся: меняется только videoRef.current.muted.
+   */
   const toggleSound = () => {
     const el = videoRef.current;
     if (!el) return;
-    const next = !el.muted;
-    el.muted = next;
-    if (!next) {
-      el.volume = 1;
-      // Звук включён по нажатию — это жест пользователя, поэтому play() со звуком разрешён
+    if (el.muted) {
+      el.muted = false;
+      el.defaultMuted = false;
+      el.removeAttribute("muted"); // iOS: атрибут muted иначе может «перебить» свойство
+      el.volume = 1; // на iOS громкость задаётся кнопками телефона — строка безвредна
       if (el.paused) {
         userPaused.current = false;
-        el.play().catch(() => {});
       }
+      // play() в том же жесте: если ролик стоял на паузе — запустится уже со звуком
+      el.play().catch(() => {
+        // браузер отказал (редко) — возвращаемся в беззвучный режим, состояние кнопки честное
+        el.muted = true;
+        setMuted(true);
+      });
+    } else {
+      el.muted = true;
     }
     setMuted(el.muted);
   };
 
-  /** Проверка звуковой дорожки в браузерах, где это доступно (Safari / Firefox) */
-  const detectAudio = (v: HTMLVideoElement) => {
-    const anyV = v as HTMLVideoElement & { audioTracks?: { length: number }; mozHasAudio?: boolean };
-    if (anyV.audioTracks && anyV.audioTracks.length === 0) setHasAudio(false);
-    else if (typeof anyV.mozHasAudio === "boolean" && !anyV.mozHasAudio) setHasAudio(false);
-  };
-
   const ctrl =
-    "grid place-items-center rounded-full shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 active:scale-95 focus-visible:outline-offset-2";
+    "inline-flex items-center justify-center rounded-full shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 active:scale-95 focus-visible:outline-offset-2";
 
   return (
     <motion.div
@@ -144,7 +150,6 @@ export function HeroVideo({ className = "" }: { className?: string }) {
         onLoadedMetadata={(e) => {
           const v = e.currentTarget;
           if (v.videoWidth && v.videoHeight) setAspect(v.videoWidth / v.videoHeight);
-          detectAudio(v);
         }}
         onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
         onPlay={() => setPlaying(true)}
@@ -154,13 +159,14 @@ export function HeroVideo({ className = "" }: { className?: string }) {
         <source src={video.src} type={video.type} />
       </video>
 
-      {/* Управление: пауза слева, звук — в самом углу. Кнопки не перекрываются (flex + gap) */}
-      <div className="absolute bottom-3 right-3 flex items-center gap-2 lg:bottom-4 lg:right-4">
+      {/* Управление в правом нижнем углу (там пол сцены — лица детей не закрываются).
+          Единый стиль: белые «таблетки» с фиолетовой обводкой; звук включён — жёлтая. Высота ≥ 44px. */}
+      <div className="absolute bottom-2.5 right-2.5 flex items-center gap-2 sm:bottom-3 sm:right-3 lg:bottom-4 lg:right-4">
         <button
           type="button"
           onClick={toggle}
           aria-label={playing ? t.common.pauseVideo : t.common.playVideo}
-          className={`${ctrl} size-11 bg-white/85 text-violet backdrop-blur hover:bg-white`}
+          className={`${ctrl} size-11 bg-white/90 text-violet ring-2 ring-violet/10 backdrop-blur hover:bg-white`}
         >
           {playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="size-4 translate-x-px" aria-hidden="true" />}
         </button>
@@ -171,11 +177,18 @@ export function HeroVideo({ className = "" }: { className?: string }) {
             aria-label={muted ? t.common.soundOn : t.common.soundOff}
             aria-pressed={!muted}
             title={muted ? t.common.soundOn : t.common.soundOff}
-            className={`${ctrl} size-12 ring-[3px] ring-white ${
-              muted ? "bg-violet text-white hover:bg-violet-700" : "bg-sun text-violet hover:bg-[#ffd900]"
+            className={`${ctrl} h-11 min-w-11 gap-1.5 px-3 font-display text-[0.86rem] font-extrabold ring-2 ring-white sm:h-12 sm:min-w-12 ${
+              muted ? "bg-violet text-white hover:bg-violet-700" : "bg-sun px-0 text-violet hover:bg-[#ffd900]"
             }`}
           >
-            {muted ? <VolumeX className="size-5" aria-hidden="true" /> : <Volume2 className="size-5" aria-hidden="true" />}
+            {muted ? (
+              <>
+                <VolumeX className="size-5 shrink-0" aria-hidden="true" />
+                <span aria-hidden="true" className="whitespace-nowrap pr-0.5">{t.common.soundPill}</span>
+              </>
+            ) : (
+              <Volume2 className="size-5" aria-hidden="true" />
+            )}
           </button>
         ) : null}
       </div>

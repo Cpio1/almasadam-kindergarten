@@ -9,12 +9,15 @@ export type MascotPose =
   | "languages"
   | "food"
   | "news"
-  | "contact";
+  | "contact"
+  | "documents";
 
 export type AssetManifest = {
   logo: ImageAsset | null;
   heroPoster: ImageAsset | null;
   heroVideo: { src: string; type: string; hasAudio: boolean } | null;
+  /** Файлы из public/documents/ (пути вида "/documents/file.pdf") */
+  documents: string[];
   ogImage: ImageAsset | null;
   mascot: Record<MascotPose, ImageAsset | null>;
   aboutPhotos: (ImageAsset | null)[];

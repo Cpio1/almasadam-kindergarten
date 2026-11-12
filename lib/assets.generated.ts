@@ -10,7 +10,7 @@ export const assetManifest: AssetManifest = {
     "width": 1080
   },
   "heroVideo": {
-    "src": "/videos/main-page.mp4",
+    "src": "/videos/main-page.mp4?v=be3d78c963",
     "type": "video/mp4",
     "hasAudio": true
   },
@@ -46,12 +46,14 @@ export const assetManifest: AssetManifest = {
       "src": "/mascot/adam-contact.png",
       "width": 1138,
       "height": 1382
-    }
+    },
+    "documents": null
   },
   "aboutPhotos": [
     null,
     null,
     null
   ],
-  "gallery": []
+  "gallery": [],
+  "documents": []
 };

@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pub = path.join(root, "public");
@@ -121,8 +122,10 @@ for (const rel of [
   "videos/almasadam-hero.webm",
 ]) {
   if (exists(rel)) {
+    // ?v=<хэш содержимого>: после замены ролика браузеры и CDN не отдадут старую копию из кэша
+    const hash = crypto.createHash("md5").update(fs.readFileSync(path.join(pub, rel))).digest("hex").slice(0, 10);
     heroVideo = {
-      src: "/" + rel,
+      src: `/${rel}?v=${hash}`,
       type: rel.endsWith(".webm") ? "video/webm" : "video/mp4",
       hasAudio: videoHasAudio(rel),
     };
@@ -130,7 +133,7 @@ for (const rel of [
   }
 }
 
-const poses = ["welcome", "about", "reading", "languages", "food", "news", "contact"];
+const poses = ["welcome", "about", "reading", "languages", "food", "news", "contact", "documents"];
 const mascot = Object.fromEntries(poses.map((p) => [p, findImage(`mascot/adam-${p}`)]));
 
 const aboutPhotos = [1, 2, 3].map((n) => findImage(`images/about-${n}`));
@@ -151,7 +154,19 @@ try {
   gallery = [];
 }
 
-const manifest = { logo, heroPoster, heroVideo, ogImage, mascot, aboutPhotos, gallery };
+// Документы для родителей: только реально существующие файлы (кнопки без файла не показываем)
+let documents = [];
+try {
+  documents = fs
+    .readdirSync(path.join(pub, "documents"))
+    .filter((f) => !f.startsWith(".") && exists(`documents/${f}`))
+    .sort()
+    .map((f) => `/documents/${f}`);
+} catch {
+  documents = [];
+}
+
+const manifest = { logo, heroPoster, heroVideo, ogImage, mascot, aboutPhotos, gallery, documents };
 
 const file = `// ⚠️ Файл сгенерирован автоматически скриптом scripts/check-assets.mjs.
 // Не редактируйте вручную — добавьте файлы в public/ и перезапустите dev/build.
@@ -169,5 +184,6 @@ const found = [
   heroPoster && "poster",
   ...Object.entries(mascot).filter(([, v]) => v).map(([k]) => `mascot:${k}`),
   gallery.length && `gallery×${gallery.length}`,
+  documents.length && `documents×${documents.length}`,
 ].filter(Boolean);
 console.log(`[assets] найдено: ${found.length ? found.join(", ") : "пока ничего — используются заглушки"}`);

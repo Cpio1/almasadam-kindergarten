@@ -10,6 +10,7 @@ import { Programs } from "@/components/sections/Programs";
 import { Food } from "@/components/sections/Food";
 import { Gallery } from "@/components/sections/Gallery";
 import { News } from "@/components/sections/News";
+import { Documents } from "@/components/sections/Documents";
 import { Contacts } from "@/components/sections/Contacts";
 import { ClipDefs } from "@/components/ui/Fun";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
           <Food />
           <Gallery />
           <News />
+          <Documents />
           <Contacts />
         </main>
         <Footer />

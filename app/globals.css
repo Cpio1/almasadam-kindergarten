@@ -56,6 +56,31 @@
   --animate-orbit: orbit 12s ease-in-out infinite;
   --animate-spin-rev: spin-rev 30s linear infinite;
   --animate-pop: pop 3.2s ease-in-out infinite;
+  /* Мягкая «волна» вокруг главной кнопки WhatsApp: короткий импульс и долгая пауза */
+  --animate-wa-pulse: wa-pulse 3.6s ease-out infinite;
+  --animate-nudge: nudge 2.2s ease-in-out infinite;
+
+  @keyframes wa-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    45%,
+    100% {
+      transform: scale(1.1, 1.3);
+      opacity: 0;
+    }
+  }
+  @keyframes nudge {
+    0%,
+    60%,
+    100% {
+      transform: translateX(0);
+    }
+    30% {
+      transform: translateX(4px);
+    }
+  }
 
   @keyframes sway {
     0%,

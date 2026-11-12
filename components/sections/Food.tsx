@@ -10,6 +10,7 @@ import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { AppleArt, BerriesArt, CarrotArt, LeafArt, PlateArt, Wave } from "@/components/ui/Decor";
 import { Citrus, Drop, Tulip, WaveRibbon } from "@/components/ui/Shapes";
+import { FoodJourney } from "@/components/food/FoodJourney";
 
 export function Food() {
   const { t } = useI18n();
@@ -17,15 +18,15 @@ export function Food() {
   return (
     <section id="food" aria-labelledby="food-title" className="section-clip relative bg-white">
       {/* «Питание» — тема сада и фруктов: долька апельсина, капли, тюльпаны */}
-      {/* телефон / планшет: долька и капля рядом с бейджем */}
-      <Citrus className="absolute right-4 top-4 w-12 animate-spin-slower sm:right-8 sm:w-14 lg:hidden" />
-      <Drop className="absolute right-[4.75rem] top-12 w-5 animate-bob sm:right-[6.5rem] sm:w-6 lg:hidden" color="#159FE2" />
       {/* десктоп: в полях */}
       <Citrus className="absolute -right-10 top-10 hidden w-28 animate-spin-slower xl:block" />
       <Tulip className="absolute -left-2 bottom-16 hidden w-12 origin-bottom animate-sway min-[1360px]:block" color="#FF7BAC" />
       <Tulip className="absolute left-6 bottom-12 hidden w-9 origin-bottom animate-sway [--r:6deg] [animation-delay:-1.5s] min-[1360px]:block" color="#FFE326" />
       <div className="container-site section-y relative !pt-8 lg:!pt-8">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-14">
+        {/* телефон и планшет — «Вкусное путешествие» */}
+        <FoodJourney />
+        {/* десктоп — прежняя композиция */}
+        <div className="hidden gap-12 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
             <SectionHeading
               id="food-title"

@@ -7,11 +7,11 @@ import { sections, type SectionId } from "@/lib/site";
 import { useI18n } from "@/lib/i18n";
 
 /**
- * Пункты в меню «Ещё»: на ноутбуках (1024–1439px) — галерея, новости, контакты;
- * на широких экранах (≥1440px) — только новости и контакты (длинные подписи не помещаются в строку).
+ * Пункты в меню «Ещё»: на ноутбуках (1024–1439px) — галерея, новости, документы, контакты;
+ * на широких экранах (≥1440px) — новости, документы и контакты (длинные подписи не помещаются в строку).
  */
-const overflowLaptop: SectionId[] = ["gallery", "news", "contacts"];
-const overflowWide: SectionId[] = ["news", "contacts"];
+const overflowLaptop: SectionId[] = ["gallery", "news", "documents", "contacts"];
+const overflowWide: SectionId[] = ["news", "documents", "contacts"];
 
 export function DesktopNav({
   active,

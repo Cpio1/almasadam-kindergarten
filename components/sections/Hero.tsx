@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowDown, Clock3, UtensilsCrossed, Languages } from "lucide-react";
+import { ArrowDown, ArrowRight, Clock3, UtensilsCrossed, Languages } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { whatsappLink } from "@/lib/site";
 import { scrollToSection } from "@/lib/hooks";
@@ -17,6 +17,37 @@ const fadeUp = (delay: number) => ({
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, delay, ease },
 });
+
+/**
+ * Главная кнопка WhatsApp на телефоне/планшете: плавная асимметричная форма, градиент,
+ * объёмная тень, крупная иконка, звёздочка и стрелка. Пульсация — редкий мягкий импульс.
+ */
+function HeroWaButton({ href, label }: { href: string; label: string }) {
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 500, damping: 22 }}
+      className="group relative isolate flex min-h-[64px] w-full items-center gap-3 rounded-[24px_40px_30px_40px/30px_34px_30px_34px] bg-[linear-gradient(135deg,#4BEA92_0%,#22C063_42%,#128C4A_100%)] py-2 pl-2 pr-3 font-display text-[1.08rem] font-extrabold leading-tight text-white shadow-[0_6px_0_#0b5c30,0_20px_32px_-14px_rgba(18,140,74,0.85)] sm:w-auto sm:min-w-[340px] lg:hidden"
+    >
+      {/* мягкая волна-пульс за кнопкой */}
+      <span aria-hidden="true" className="absolute inset-0 -z-10 animate-wa-pulse rounded-[inherit] bg-[#22C063]" />
+      {/* блик */}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-1 h-3 rounded-full bg-white/30 blur-[2px]" />
+      <span className="relative grid size-12 shrink-0 place-items-center rounded-full bg-white text-[#1FB85A] shadow-[0_3px_0_rgb(0_0_0/0.12)]">
+        <WhatsAppIcon className="size-7" />
+      </span>
+      <span className="relative flex-1 text-left">{label}</span>
+      <span aria-hidden="true" className="relative grid size-10 shrink-0 place-items-center rounded-full bg-sun text-violet shadow-[0_3px_0_#d9a800]">
+        <ArrowRight className="size-5 animate-nudge" />
+      </span>
+      <Sparkle className="absolute -right-1.5 -top-2.5 w-6 animate-twinkle" color="#FFE326" />
+      <Sparkle className="absolute -left-1 -bottom-2 w-4 animate-twinkle [animation-delay:1.4s]" color="#159FE2" />
+    </motion.a>
+  );
+}
 
 /**
  * Первый экран.
@@ -83,11 +114,14 @@ export function Hero() {
           </motion.p>
 
           <motion.div data-area="cta" className="mt-7 flex flex-wrap items-center gap-3 lg:mt-6" {...fadeUp(0.2)}>
+            {/* Телефон и планшет: выразительная «капсула» WhatsApp */}
+            <HeroWaButton href={whatsappLink(t.waMessage)} label={t.hero.ctaPrimary} />
+            {/* Десктоп: прежняя кнопка без изменений */}
             <a
               href={whatsappLink(t.waMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-wa w-full sm:w-auto"
+              className="btn btn-wa hidden lg:inline-flex"
             >
               <WhatsAppIcon className="size-5" />
               {t.hero.ctaPrimary}

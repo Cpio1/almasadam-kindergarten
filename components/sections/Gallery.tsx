@@ -114,14 +114,23 @@ export function Gallery() {
                     aria-label={`${t.gallery.openPhoto}: ${p.alt}`}
                     className={`group relative block w-full overflow-hidden bg-violet-50 ${shapes[i % shapes.length]} ${frames[i % frames.length]}`}
                   >
-                    <Image
-                      src={p.src}
-                      width={p.width}
-                      height={p.height}
-                      alt={p.alt}
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
-                      className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.05]"
-                    />
+                    {/* zoom-in при появлении (внешний слой) + увеличение при наведении (сам снимок) */}
+                    <motion.span
+                      className="block"
+                      initial={{ scale: 1.1 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Image
+                        src={p.src}
+                        width={p.width}
+                        height={p.height}
+                        alt={p.alt}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
+                        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.05]"
+                      />
+                    </motion.span>
                     <span className="absolute inset-0 grid place-items-center bg-violet/0 transition-colors duration-300 group-hover:bg-violet/25">
                       <span className="grid size-12 scale-75 place-items-center rounded-full bg-white text-violet opacity-0 shadow-soft transition duration-300 group-hover:scale-100 group-hover:opacity-100">
                         <Plus className="size-6" aria-hidden="true" />

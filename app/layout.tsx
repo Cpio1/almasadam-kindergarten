@@ -108,6 +108,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Сайт всегда светлый: просим расширение Dark Reader не перекрашивать страницу */}
         <meta name="darkreader-lock" />
+        {/* Без JavaScript анимации появления не запустятся — показываем весь контент сразу */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: '<style>[style*="opacity:0"]{opacity:1!important;transform:none!important;clip-path:none!important}</style>',
+          }}
+        />
         <script dangerouslySetInnerHTML={{ __html: langScript }} />
         <script
           type="application/ld+json"

@@ -10,10 +10,13 @@ export function Logo({
   className = "h-10",
   priority = false,
   tone = "violet",
+  compact = false,
 }: {
   className?: string;
   priority?: boolean;
   tone?: "violet" | "white";
+  /** Меньший текстовый вариант для узких мест (мобильное меню на 320px) */
+  compact?: boolean;
 }) {
   if (assets.logo) {
     return (
@@ -31,7 +34,9 @@ export function Logo({
 
   return (
     <span
-      className={`inline-flex items-center font-display text-[1.15rem] font-black tracking-[0.03em] min-[375px]:text-[1.3rem] lg:text-[1.5rem] ${
+      className={`inline-flex items-center font-display font-black tracking-[0.03em] ${
+        compact ? "text-[1rem] min-[375px]:text-[1.15rem]" : "text-[1.15rem] min-[375px]:text-[1.3rem] lg:text-[1.5rem]"
+      } ${
         tone === "white" ? "text-white" : "text-violet"
       }`}
       aria-label="ALMASADAM"

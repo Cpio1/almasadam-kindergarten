@@ -19,6 +19,7 @@ import {
   Apple,
   CalendarDays,
   MessageCircleHeart,
+  FolderOpen,
   type LucideIcon,
 } from "lucide-react";
 import { assets, type MascotPose } from "@/lib/assets";
@@ -63,6 +64,7 @@ const poseIcon: Record<MascotPose, LucideIcon> = {
   food: Apple,
   news: CalendarDays,
   contact: MessageCircleHeart,
+  documents: FolderOpen,
 };
 
 /**
@@ -70,7 +72,7 @@ const poseIcon: Record<MascotPose, LucideIcon> = {
  * «О нас»: Әлем показывает рукой (поза contact) — «показывает детский сад».
  * Чтобы использовать отдельную картинку, положите public/mascot/adam-about.png.
  */
-const poseFallback: Partial<Record<MascotPose, MascotPose>> = { about: "contact" };
+const poseFallback: Partial<Record<MascotPose, MascotPose>> = { about: "contact", documents: "reading" };
 
 const easeInOut = [0.45, 0, 0.55, 1] as const;
 

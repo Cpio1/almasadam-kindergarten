@@ -45,13 +45,30 @@ export function useActiveSection(ids: readonly string[]) {
 export function useBodyLock(locked: boolean) {
   useEffect(() => {
     if (!locked) return;
-    const { overflow, paddingRight } = document.body.style;
+    // iOS Safari игнорирует overflow:hidden на body — фиксируем body и запоминаем позицию прокрутки
+    const y = window.scrollY;
+    const body = document.body;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+      paddingRight: body.style.paddingRight,
+    };
     const scrollbar = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = "hidden";
-    if (scrollbar > 0) document.body.style.paddingRight = `${scrollbar}px`;
+    body.style.position = "fixed";
+    body.style.top = `-${y}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
     return () => {
-      document.body.style.overflow = overflow;
-      document.body.style.paddingRight = paddingRight;
+      Object.assign(body.style, prev);
+      // мгновенно, без плавной анимации html { scroll-behavior: smooth }
+      window.scrollTo({ top: y, left: 0, behavior: "instant" as ScrollBehavior });
     };
   }, [locked]);
 }
