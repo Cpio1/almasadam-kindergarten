@@ -12,7 +12,9 @@ import { MascotFigure } from "@/components/ui/MascotFigure";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon } from "@/components/ui/BrandIcons";
-import { Cloud, Cube, HalfCircle, Ring, SoftStar, Sparkle, Squiggle, Wave } from "@/components/ui/Decor";
+import { Wave } from "@/components/ui/Decor";
+import { Spiral, Star3D } from "@/components/ui/Fun";
+import { Cube3D, Drop, HalfSun, Organic, Zigzag } from "@/components/ui/Shapes";
 
 function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   const { t, lang } = useI18n();
@@ -99,41 +101,38 @@ function InstagramPromo() {
         rel="noopener noreferrer"
         className="group relative isolate block overflow-hidden rounded-[36px_36px_36px_12px] bg-gradient-to-br from-sky-50 via-sky-50 to-cream px-5 pb-7 pt-7 shadow-soft ring-1 ring-sky-100 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lift focus-visible:!rounded-[36px_36px_36px_12px] focus-visible:outline-offset-4 sm:px-10 lg:rounded-[56px_56px_56px_18px] lg:px-14 lg:py-10 lg:focus-visible:!rounded-[56px_56px_56px_18px]"
       >
-        {/* ── Декор: разные фигуры, на телефоне — минимум ── */}
-        <HoverShift className="-right-6 -top-6 -z-10 w-[46%] max-w-[420px] lg:right-[2%] lg:top-[-12%] lg:w-[40%]" shift="group-hover:-translate-x-3 group-hover:translate-y-2">
-          <span className="block aspect-square w-full animate-morph bg-sun-100" />
+        {/* ── «Новости» — тема звёзд и кубиков; на телефоне — только то, что не мешает тексту ── */}
+        <HoverShift className="-right-10 -top-10 -z-10 w-[52%] max-w-[440px] lg:right-[0%] lg:top-[-18%] lg:w-[42%]" shift="group-hover:-translate-x-3 group-hover:translate-y-2">
+          <Organic className="w-full animate-spin-slower" color="#FFF4A8" variant={1} />
         </HoverShift>
-        <HoverShift className="right-[4%] top-[42%] w-20 sm:top-5 sm:w-32 lg:right-[44%] lg:top-6" shift="group-hover:translate-x-4">
-          <Cloud className="w-full animate-drift" color="#ffffff" />
+        <HoverShift className="left-2 top-2 w-9 sm:left-5 sm:top-5 sm:w-14 lg:left-auto lg:right-[8%] lg:top-[10%]" shift="group-hover:rotate-45 group-hover:scale-110">
+          <Star3D className="w-full animate-wiggle" color="#FFE326" />
         </HoverShift>
-        <HoverShift className="left-[6%] top-6 hidden w-7 sm:block lg:left-auto lg:right-[8%] lg:top-[16%]" shift="group-hover:rotate-45 group-hover:scale-125">
-          <Sparkle className="w-full animate-twinkle" color="#FFE326" />
+        <HoverShift className="bottom-[14%] left-[46%] hidden w-14 lg:block" shift="group-hover:-translate-y-3 group-hover:rotate-12">
+          <Cube3D className="w-full animate-float [--r:-10deg]" color="#E83A32" letter="N" />
         </HoverShift>
-        <HoverShift className="bottom-[14%] left-[46%] hidden w-12 lg:block" shift="group-hover:-translate-y-3 group-hover:rotate-12">
-          <Cube className="w-full animate-float [--r:-10deg]" color="#E83A32" />
+        <HoverShift className="-bottom-2 right-[5%] hidden w-14 sm:block" shift="group-hover:-translate-y-2 group-hover:-rotate-12">
+          <Cube3D className="w-full animate-float [--r:12deg] [animation-delay:-2s]" color="#159FE2" letter="Ә" />
         </HoverShift>
-        <HoverShift className="-bottom-3 right-[6%] hidden w-14 sm:block" shift="group-hover:-translate-y-2 group-hover:-rotate-12">
-          <Cube className="w-full animate-float [--r:12deg] [animation-delay:-2s]" color="#159FE2" />
+        <HoverShift className="right-[30%] top-[50%] hidden w-9 lg:block" shift="group-hover:-translate-y-2">
+          <Drop className="w-full animate-bob" color="#FF7BAC" />
         </HoverShift>
-        <HoverShift className="right-[30%] top-[52%] hidden w-10 lg:block" shift="group-hover:rotate-90">
-          <SoftStar className="w-full animate-wiggle" color="#80C924" />
+        <HoverShift className="-bottom-14 -left-14 -z-10 hidden w-32 lg:block" shift="group-hover:translate-x-3 group-hover:-translate-y-3">
+          <Spiral className="w-full animate-spin-rev opacity-40" color="#159FE2" />
         </HoverShift>
-        <HoverShift className="-bottom-10 -left-10 -z-10 hidden w-44 lg:block" shift="group-hover:translate-x-3 group-hover:-translate-y-3">
-          <Ring className="w-full animate-spin-slower opacity-60" color="#CDECFB" />
-        </HoverShift>
-        <HoverShift className="bottom-8 left-[38%] hidden w-20 lg:block" shift="group-hover:translate-x-3">
-          <Squiggle className="w-full" color="#FBD5D2" />
+        <HoverShift className="bottom-7 left-[36%] hidden w-24 lg:block" shift="group-hover:translate-x-3">
+          <Zigzag className="w-full" color="#80C924" />
         </HoverShift>
 
-        {/* ── Композиция: телефон — заголовок → Адам → текст → кнопка; десктоп — текст слева, Адам справа ── */}
+        {/* ── Композиция: телефон — заголовок → Әлем → текст → кнопка; десктоп — текст слева, Әлем справа ── */}
         <div className="relative grid justify-items-center text-center lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:justify-items-start lg:gap-x-10 lg:text-left">
           <h3 className="max-w-[18ch] text-[clamp(1.55rem,1.1rem+2vw,2.4rem)] font-black leading-tight lg:col-start-1 lg:row-start-1 lg:self-end">
             {t.news.promoTitle}
           </h3>
 
           <div className="relative mt-4 lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:mt-0 lg:justify-self-center">
-            {/* Адам с календарём на солнечном полукруге */}
-            <HalfCircle className="absolute bottom-[2%] left-1/2 w-[112%] -translate-x-1/2" color="#FFE326" />
+            {/* Әлем с календарём на полусолнце с лучами */}
+            <HalfSun className="absolute bottom-[2%] left-1/2 w-[120%] -translate-x-1/2" />
             <div className="relative origin-bottom transition-transform duration-500 group-hover:[animation:wiggle_1.6s_ease-in-out_infinite]">
               <MascotFigure
                 pose="news"

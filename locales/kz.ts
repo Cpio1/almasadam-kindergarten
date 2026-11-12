@@ -34,8 +34,8 @@ export const kz: Dictionary = {
     contacts: "Байланыс",
   },
   mascot: {
-    name: "Адам",
-    alt: "Адам — ALMASADAM балабақшасының көмекші кейіпкері",
+    name: "Әлем",
+    alt: "Әлем — ALMASADAM балабақшасының көмекші кейіпкері",
   },
   hero: {
     badge: "Алматыдағы жекеменшік балабақша",
@@ -51,7 +51,7 @@ export const kz: Dictionary = {
     videoLabel: "ALMASADAM балабақшасының өмірі туралы бейне",
     placeholderTitle: "Қош келдіңіз!",
     placeholderText: "Ашылымдар әлемі осы жерден басталады",
-    mascotSay: "Сәлем! Мен Адаммын",
+    mascotSay: "Сәлем! Мен Әлеммін",
   },
   about: {
     eyebrow: "Біз туралы",
@@ -150,8 +150,8 @@ export const kz: Dictionary = {
     rights: "Барлық құқықтар қорғалған.",
   },
   helper: {
-    open: "Адам көмекшісін ашу",
-    title: "Сәлем! Мен Адаммын",
+    open: "Әлем көмекшісін ашу",
+    title: "Сәлем! Мен Әлеммін",
     text: "Қайда барамыз?",
     actions: {
       about: "Балабақша туралы",

@@ -113,7 +113,7 @@ export function Star3D({ className = "", style, color = brand.sun, shade = "#E7B
   );
 }
 
-/* ───────── Мягкий 3D-кубик с буквой (как у Адама) ───────── */
+/* ───────── Мягкий 3D-кубик с буквой (как у Әлема) ───────── */
 export function ToyBlock({ className = "", style, color = brand.berry, letter }: P & { color?: string; letter?: string }) {
   return (
     <svg viewBox="0 0 64 64" aria-hidden="true" className={`${base} ${className}`} style={style}>

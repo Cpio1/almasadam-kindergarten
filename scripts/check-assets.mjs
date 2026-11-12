@@ -89,11 +89,17 @@ function findImage(baseRel) {
 }
 
 const logo = findImage("images/logo");
-const heroPoster = findImage("images/hero-poster");
+const heroPoster = findImage("videos/main-page-poster") ?? findImage("images/hero-poster");
 const ogImage = findImage("images/og-image");
 
+// Видео главного экрана: public/videos/main-page.mp4 (запасные имена — для совместимости)
 let heroVideo = null;
-for (const rel of ["videos/almasadam-hero.mp4", "videos/almasadam-hero.webm"]) {
+for (const rel of [
+  "videos/main-page.mp4",
+  "videos/main-page.webm",
+  "videos/almasadam-hero.mp4",
+  "videos/almasadam-hero.webm",
+]) {
   if (exists(rel)) {
     heroVideo = { src: "/" + rel, type: rel.endsWith(".webm") ? "video/webm" : "video/mp4" };
     break;

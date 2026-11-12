@@ -8,15 +8,22 @@ import { tones } from "@/lib/tones";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
-import { AppleArt, BerriesArt, CarrotArt, Cloud, Flower, LeafArt, PlateArt, Squiggle, Wave } from "@/components/ui/Decor";
+import { AppleArt, BerriesArt, CarrotArt, LeafArt, PlateArt, Wave } from "@/components/ui/Decor";
+import { Citrus, Drop, Tulip, WaveRibbon } from "@/components/ui/Shapes";
 
 export function Food() {
   const { t } = useI18n();
 
   return (
     <section id="food" aria-labelledby="food-title" className="section-clip relative bg-white">
-      <Flower className="absolute -right-6 top-16 hidden w-20 animate-spin-slower opacity-90 lg:block" color="#FBD5D2" center="#FFE326" />
-      <Cloud className="absolute left-[44%] top-8 hidden w-28 animate-drift lg:block" color="#EAF7FE" />
+      {/* «Питание» — тема сада и фруктов: долька апельсина, капли, тюльпаны */}
+      {/* телефон / планшет: долька и капля рядом с бейджем */}
+      <Citrus className="absolute right-4 top-4 w-12 animate-spin-slower sm:right-8 sm:w-14 lg:hidden" />
+      <Drop className="absolute right-[4.75rem] top-12 w-5 animate-bob sm:right-[6.5rem] sm:w-6 lg:hidden" color="#159FE2" />
+      {/* десктоп: в полях */}
+      <Citrus className="absolute -right-10 top-10 hidden w-28 animate-spin-slower xl:block" />
+      <Tulip className="absolute -left-2 bottom-16 hidden w-12 origin-bottom animate-sway min-[1360px]:block" color="#FF7BAC" />
+      <Tulip className="absolute left-6 bottom-12 hidden w-9 origin-bottom animate-sway [--r:6deg] [animation-delay:-1.5s] min-[1360px]:block" color="#FFE326" />
       <div className="container-site section-y relative !pt-8 lg:!pt-8">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
@@ -28,7 +35,7 @@ export function Food() {
               tone="leaf"
             />
 
-            {/* Крупная цифра 5 + фрукты + Адам */}
+            {/* Крупная цифра 5 + фрукты + Әлем */}
             <Reveal delay={0.1} className="relative mt-8 flex flex-wrap items-end gap-2 sm:mt-10 lg:mt-6">
               <div className="relative isolate">
                 <PlateArt className="absolute left-1/2 top-1/2 -z-10 w-[120%] -translate-x-1/2 -translate-y-1/2" />
@@ -72,7 +79,8 @@ export function Food() {
           <Reveal delay={0.05} className="relative">
             {/* мягкая органическая подложка за карточкой */}
             <div aria-hidden="true" className="absolute -inset-3 -z-0 hidden animate-morph bg-leaf-50 sm:block lg:-inset-5" />
-            <Squiggle className="absolute -bottom-5 left-8 z-10 w-24 animate-wiggle" color="#FFE326" />
+            <Drop className="absolute -right-2 -top-6 z-10 w-9 animate-float [--r:14deg] sm:-right-4 lg:w-10" color="#80C924" />
+            <WaveRibbon className="absolute -bottom-6 left-6 z-10 w-28 animate-sway [--r:-3deg]" colors={["#80C924", "#FF8A1F"]} />
             <div className="relative rounded-[32px] bg-white p-5 shadow-soft ring-1 ring-violet-50 sm:p-7 lg:p-6">
               <h3 className="text-[1.2rem] font-extrabold lg:text-[1.1rem]">{t.food.timelineTitle}</h3>
               <ol className="relative mt-6 lg:mt-4">

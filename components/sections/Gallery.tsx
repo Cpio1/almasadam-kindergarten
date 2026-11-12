@@ -9,7 +9,8 @@ import { assets } from "@/lib/assets";
 import { galleryConfig, GALLERY_PAGE_SIZE } from "@/data/gallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
-import { Ring, SoftStar, Squiggle, Wave } from "@/components/ui/Decor";
+import { Wave } from "@/components/ui/Decor";
+import { Burst, Confetti, Heart, Polaroid } from "@/components/ui/Shapes";
 import { Lightbox } from "@/components/gallery/Lightbox";
 import type { GalleryPhoto } from "@/components/gallery/types";
 import type { ProgramTone } from "@/data/programs";
@@ -24,6 +25,18 @@ const shapes = [
   "shape-arch-down",
   "shape-pebble",
   "rounded-[32px_32px_10px_32px]",
+];
+
+/** Цветная «тень-наклейка» со смещением — нестандартная рамка для каждой фотографии */
+const frames = [
+  "shadow-[7px_7px_0_#FFE326]",
+  "shadow-[-7px_7px_0_#159FE2]",
+  "shadow-[7px_-7px_0_#80C924]",
+  "shadow-[-7px_-7px_0_#E83A32]",
+  "shadow-[7px_7px_0_#FF7BAC]",
+  "shadow-[-7px_7px_0_#7B5CE0]",
+  "shadow-[7px_7px_0_#FF8A1F]",
+  "shadow-[-7px_-7px_0_#159FE2]",
 ];
 
 /** Заглушки: разная высота для живой мозаики */
@@ -64,9 +77,15 @@ export function Gallery() {
 
   return (
     <section id="gallery" aria-labelledby="gallery-title" className="section-clip relative bg-milk">
-      <SoftStar className="absolute left-[8%] top-14 w-10 animate-wiggle [--r:-10deg] lg:w-12" color="#FFE326" />
-      <Ring className="absolute -right-8 top-24 hidden w-28 animate-drift opacity-60 sm:block" color="#CDECFB" />
-      <Squiggle className="absolute bottom-24 left-[-1rem] hidden w-28 animate-drift lg:block" color="#FBD5D2" />
+      {/* «Галерея» — тема праздника: звёзды-взрывы, конфетти, полароиды, сердечко */}
+      {/* телефон: по углам заголовка (он выровнен по центру — по бокам свободно) */}
+      <Burst className="absolute left-2 top-8 w-11 animate-spin-slower sm:left-8 sm:w-14 lg:hidden" />
+      <Heart className="absolute right-4 top-10 w-8 animate-pop [--r:12deg] sm:right-10 sm:w-10 lg:hidden" color="#FF7BAC" />
+      {/* десктоп: по бокам от центрированного заголовка и в полях */}
+      <Burst className="absolute left-[5%] top-12 hidden w-20 animate-spin-slower lg:block" color="#159FE2" inner="#FFE326" />
+      <Confetti className="absolute right-[3%] top-10 hidden w-24 animate-orbit lg:block xl:right-[8%] xl:w-32" />
+      <Polaroid className="absolute -left-6 top-[46%] hidden w-20 animate-sway [--r:-14deg] xl:block" color="#FBD5D2" />
+      <Polaroid className="absolute -right-4 top-[62%] hidden w-16 animate-sway [--r:12deg] [animation-delay:-2s] xl:block" color="#CDECFB" />
       <div className="container-site section-y relative !pt-8 lg:!pt-8">
         <SectionHeading
           id="gallery-title"
@@ -93,7 +112,7 @@ export function Gallery() {
                     type="button"
                     onClick={() => setOpenIndex(i)}
                     aria-label={`${t.gallery.openPhoto}: ${p.alt}`}
-                    className={`group relative block w-full overflow-hidden bg-violet-50 ${shapes[i % shapes.length]}`}
+                    className={`group relative block w-full overflow-hidden bg-violet-50 ${shapes[i % shapes.length]} ${frames[i % frames.length]}`}
                   >
                     <Image
                       src={p.src}
@@ -143,7 +162,7 @@ export function Gallery() {
                     alt=""
                     tone={tile.tone}
                     variant={(i % 3) as 0 | 1 | 2}
-                    className={`w-full ${tile.aspect} ${shapes[i % shapes.length]}`}
+                    className={`w-full ${tile.aspect} ${shapes[i % shapes.length]} ${frames[i % frames.length]}`}
                   />
                 </li>
               ))}

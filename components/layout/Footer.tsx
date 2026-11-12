@@ -6,7 +6,8 @@ import { sections, site, whatsappLink } from "@/lib/site";
 import { scrollToSection } from "@/lib/hooks";
 import { Logo } from "@/components/ui/Logo";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { Cube, Sparkle, Wave } from "@/components/ui/Decor";
+import { Wave } from "@/components/ui/Decor";
+import { Moon, StarField } from "@/components/ui/Shapes";
 
 export function Footer() {
   const { t } = useI18n();
@@ -16,8 +17,9 @@ export function Footer() {
     <footer className="section-clip relative bg-milk text-white">
       <Wave fill="#302079" />
       <div className="relative bg-violet">
-        <Sparkle className="absolute right-[10%] top-10 w-6 animate-twinkle" color="#FFE326" />
-        <Cube className="absolute -left-4 bottom-24 hidden w-14 opacity-90 animate-float-slow [--r:-10deg] lg:block" color="#159FE2" />
+        {/* подвал — «ночное небо»: месяц и звёздочки */}
+        <Moon className="absolute right-4 top-6 w-12 animate-sway [--r:-10deg] sm:right-[6%] sm:w-14 lg:bottom-24 lg:right-[4%] lg:top-auto lg:w-16" />
+        <StarField className="absolute right-16 top-4 hidden w-16 min-[400px]:block sm:w-24 animate-twinkle opacity-80 sm:right-[14%] lg:bottom-28 lg:right-[10%] lg:top-auto lg:w-28" />
 
         <div className="container-site grid gap-10 pb-10 pt-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1.1fr] lg:gap-12 lg:pb-10 lg:pt-6">
           <div className="sm:col-span-2 lg:col-span-1">

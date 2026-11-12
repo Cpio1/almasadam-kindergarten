@@ -4,8 +4,15 @@ import type { AssetManifest } from "./assets";
 
 export const assetManifest: AssetManifest = {
   "logo": null,
-  "heroPoster": null,
-  "heroVideo": null,
+  "heroPoster": {
+    "src": "/videos/main-page-poster.jpg",
+    "height": 1054,
+    "width": 1080
+  },
+  "heroVideo": {
+    "src": "/videos/main-page.mp4",
+    "type": "video/mp4"
+  },
   "ogImage": null,
   "mascot": {
     "welcome": {

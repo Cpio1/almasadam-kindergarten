@@ -9,7 +9,9 @@ import { tones } from "@/lib/tones";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
-import { Arch, Cloud, HalfCircle, Ring, SoftStar, Sparkle, Squiggle, Wave } from "@/components/ui/Decor";
+import { Wave } from "@/components/ui/Decor";
+import { FunLetters } from "@/components/ui/Fun";
+import { CloudFace, Heart, Organic, RainbowArc, Swirl, Zigzag } from "@/components/ui/Shapes";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -27,7 +29,7 @@ const langs: { key: LangKey; code: string; lang: string; solid: string; soft: st
   { key: "en", code: "EN", lang: "en", solid: "bg-leaf", soft: "bg-leaf-50", text: "text-leaf-700", shape: "shape-blob-2" },
 ];
 
-/** Таблички RU / KZ / EN вокруг Адама — только если нет картинки, где он уже держит буквы */
+/** Таблички RU / KZ / EN вокруг Әлема — только если нет картинки, где он уже держит буквы */
 function LetterTiles() {
   const tiles = [
     { t: "RU", c: "bg-berry text-white rounded-full", pos: "left-0 top-[18%] -rotate-12" },
@@ -70,7 +72,7 @@ function BlockTitle({ n, children, invert = false }: { n: string; children: Reac
 /**
  * «Образовательные программы» — один раздел из двух смысловых блоков:
  *  А. Развитие ребёнка (data/programs.ts — предварительные направления)
- *  Б. Изучение языков (RU / KZ / EN) с Адамом
+ *  Б. Изучение языков (RU / KZ / EN) с Әлемом
  */
 export function Programs() {
   const { t } = useI18n();
@@ -78,12 +80,16 @@ export function Programs() {
 
   return (
     <section id="programs" aria-labelledby="programs-title" className="section-clip relative bg-milk">
-      <Arch outline color="#CDECFB" className="absolute -right-6 top-10 hidden w-24 animate-wiggle [--r:8deg] lg:block" />
-      <SoftStar className="absolute right-[5%] top-8 w-9 animate-spin-slower lg:left-[3%] lg:right-auto lg:top-24 lg:w-10" color="#FFE326" />
-      <Squiggle className="absolute left-[38%] top-10 hidden w-24 animate-drift lg:block" color="#80C924" />
+      {/* «Программы» — тема радуги, облаков и букв */}
+      {/* телефон / планшет: облачко рядом с бейджем */}
+      <CloudFace className="absolute right-3 top-5 w-20 animate-orbit sm:right-8 sm:w-24 lg:hidden" />
+      {/* десктоп: в полях и в свободном месте над карточками */}
+      <CloudFace className="absolute left-[44%] top-6 hidden w-24 animate-orbit lg:block xl:left-[46%]" />
+      <Zigzag className="absolute -left-10 top-[34%] hidden w-28 rotate-90 xl:block" color="#FF8A1F" />
+      <Swirl className="absolute -right-8 top-[46%] hidden w-20 animate-spin-rev xl:block" color="#159FE2" dot="#E83A32" />
 
       <div className="container-site section-y relative !pt-10 lg:!pt-10">
-        {/* Заголовок + Адам */}
+        {/* Заголовок + Әлем */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             id="programs-title"
@@ -93,7 +99,8 @@ export function Programs() {
             tone="sky"
           />
           <div className="relative hidden shrink-0 pr-36 lg:block xl:pr-40">
-            <HalfCircle className="absolute bottom-0 left-[-6%] w-[112%] max-w-[230px]" color="#FFF4A8" />
+            <RainbowArc className="absolute bottom-0 left-[-8%] w-[116%] max-w-[240px]" />
+            <FunLetters text="ABC" className="absolute -left-14 top-2 text-[1.9rem]" />
             <MascotFigure
               pose="reading"
               variant="hover"
@@ -155,16 +162,21 @@ export function Programs() {
         <Reveal className="relative mt-12 lg:mt-12">
           <div className="relative isolate overflow-hidden rounded-[40px_40px_40px_14px] bg-violet px-5 pb-8 pt-7 text-white sm:px-8 lg:rounded-[56px_56px_56px_18px] lg:px-12 lg:py-9">
             {/* декор внутри блока */}
-            <Ring className="absolute -right-10 -top-12 -z-10 w-44 opacity-25 animate-spin-slower" color="#159FE2" />
-            <HalfCircle className="absolute -bottom-1 left-[30%] -z-10 hidden w-56 opacity-15 lg:block" color="#FFE326" />
-            <Cloud className="absolute right-[34%] top-6 -z-10 hidden w-24 opacity-10 animate-drift lg:block" />
-            <Sparkle className="absolute right-[8%] bottom-10 w-5 animate-twinkle" color="#FFE326" />
+            <Swirl className="absolute -right-8 -top-8 -z-10 w-32 animate-spin-slower opacity-30 lg:-right-6 lg:w-44" color="#159FE2" dot="#FFE326" />
+            <Organic className="absolute -bottom-16 left-[28%] -z-10 hidden w-60 rotate-12 opacity-25 lg:block" color="#159FE2" variant={1} />
+            <Zigzag className="absolute right-[36%] top-5 -z-10 hidden w-24 opacity-30 lg:block" color="#80C924" />
+            <Heart className="absolute bottom-2 right-3 w-5 animate-pop opacity-90 sm:bottom-4 sm:right-5 sm:w-7" color="#FF7BAC" />
 
             <div className="grid gap-6 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.6fr)] lg:items-center lg:gap-10">
-              {/* Адам с буквами RU / KZ / EN на солнечной арке */}
+              {/* Әлем с буквами RU / KZ / EN на солнечной арке */}
               <div className="relative mx-auto mb-2 w-[clamp(210px,62vw,260px)] lg:order-1 lg:mb-0 lg:w-full lg:max-w-[300px]">
-                <div aria-hidden="true" className="shape-arch absolute inset-x-[11%] bottom-0 top-[16%] -z-10 bg-sun" />
-                <SoftStar className="absolute -left-2 top-[6%] w-9 animate-wiggle" color="#E83A32" />
+                {/* «печенька» с фестонами вместо обычной арки */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-[6%] bottom-[-4%] -z-10 aspect-square animate-spin-slower bg-sun"
+                  style={{ clipPath: "url(#clip-scallop)" }}
+                />
+                <RainbowArc className="absolute -left-3 top-[4%] w-14 -rotate-[24deg] animate-sway" colors={["#E83A32", "#FFE326", "#80C924"]} />
                 {assets.mascot.languages ? null : <LetterTiles />}
                 <MascotFigure
                   pose="languages"

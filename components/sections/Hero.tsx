@@ -113,7 +113,7 @@ export function Hero() {
             <Ring className="absolute -bottom-6 right-[12%] -z-10 hidden w-24 animate-spin-slower sm:block" color="#80C924" />
             <SoftStar className="absolute -left-4 top-[12%] z-10 hidden w-10 animate-wiggle [animation-delay:-2s] lg:block" color="#E83A32" />
             <HeroVideo />
-            {/* Адам приветствует — крупный, стоит у края рамки видео.
+            {/* Әлем приветствует — крупный, стоит у края рамки видео.
                 Телефон: в левом нижнем углу, частично ниже рамки. Десктоп: выходит за левый край рамки. */}
             <div className="pointer-events-none absolute -bottom-14 -left-1 lg:-bottom-8 lg:-left-20">
               <MascotFigure

@@ -11,7 +11,9 @@ import { HeroVideoPlaceholder } from "./HeroVideoPlaceholder";
 const DEFAULT_ASPECT = 4 / 5;
 
 /**
- * Видео первого экрана: public/videos/almasadam-hero.mp4 (+ постер public/images/hero-poster.jpg).
+ * Видео первого экрана: public/videos/main-page.mp4 (+ постер public/videos/main-page-poster.jpg —
+ * первый кадр, чтобы до загрузки не было пустой/чёрной рамки).
+ * Ролик без звуковой дорожки, H.264 + faststart: autoplay, muted, loop, playsInline, без controls.
  *
  * Наличие файла проверяется при сборке (scripts/check-assets.mjs), поэтому без видео
  * браузер не делает запрос и не получает 404 — показывается фирменная заглушка.
@@ -29,6 +31,8 @@ export function HeroVideo({ className = "" }: { className?: string }) {
   const [aspect, setAspect] = useState(poster ? poster.width / poster.height : DEFAULT_ASPECT);
   const [failed, setFailed] = useState(false);
   const [playing, setPlaying] = useState(false);
+  /** Пользователь сам поставил паузу — не возобновляем автоматически */
+  const userPaused = useRef(false);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -47,6 +51,24 @@ export function HeroVideo({ className = "" }: { className?: string }) {
       .catch(() => setPlaying(false));
   }, [reduce]);
 
+  // Экономим батарею и трафик: ролик на паузе, пока главный экран вне поля зрения
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || reduce || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (el.paused && !userPaused.current) el.play().catch(() => {});
+        } else if (!el.paused) {
+          el.pause();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
+
   if (!video || failed) {
     return <HeroVideoPlaceholder className={className} />;
   }
@@ -54,8 +76,11 @@ export function HeroVideo({ className = "" }: { className?: string }) {
   const toggle = () => {
     const el = videoRef.current;
     if (!el) return;
-    if (el.paused) el.play().then(() => setPlaying(true)).catch(() => {});
-    else {
+    if (el.paused) {
+      userPaused.current = false;
+      el.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      userPaused.current = true;
       el.pause();
       setPlaying(false);
     }

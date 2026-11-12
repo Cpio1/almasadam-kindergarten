@@ -8,7 +8,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PhotoSlot } from "@/components/ui/PhotoSlot";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
-import { Cube, DotGrid, HalfCircle, SoftStar, Sparkle, Wave } from "@/components/ui/Decor";
+import { Wave } from "@/components/ui/Decor";
+import { Bloom, Cube3D, CubeStack, Organic, WaveRibbon } from "@/components/ui/Shapes";
 
 type CardKey = "care" | "play" | "langs" | "schedule";
 
@@ -25,20 +26,35 @@ export function About() {
 
   return (
     <section id="about" aria-labelledby="about-title" className="section-clip relative bg-white">
+      {/* телефон: кубик рядом с бейджем; десктоп: фигуры в полях за пределами контента */}
+      <Cube3D className="absolute right-4 top-5 w-11 animate-pop [--r:8deg] sm:right-8 sm:w-14 lg:hidden" color="#FFE326" letter="Ә" letterColor="#302079" />
+      <Bloom className="absolute -right-8 top-14 hidden w-24 animate-spin-slower xl:block" petals={["#159FE2", "#CDECFB"]} />
+      <Cube3D className="absolute -left-4 bottom-20 hidden w-16 animate-float [--r:-12deg] xl:block" color="#80C924" letter="Б" />
       <div className="container-site section-y !pt-10 lg:!pb-12 lg:!pt-10">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
           {/* Коллаж: на телефоне идёт после текста */}
           <Reveal className="relative order-2 mx-auto w-full max-w-[520px] lg:order-1 lg:max-w-[440px]">
             <div className="relative aspect-[1/0.92]">
-              {/* фигуры частично за фотографиями */}
-              <HalfCircle className="absolute -left-[6%] top-[38%] w-[46%] -rotate-90 opacity-90" color="#FFF4A8" />
-              <DotGrid className="absolute right-[2%] top-[4%] hidden w-14 opacity-20 sm:block" color="#302079" />
+              {/* «О нас» — тема кубиков: органическое пятно, волна-лента, пирамидка, ромашка */}
+              <Organic className="absolute -left-[8%] top-[22%] w-[52%] opacity-90" color="#FFF4A8" />
+              <WaveRibbon className="absolute -right-[4%] bottom-[46%] w-[34%] animate-sway [--r:-8deg] sm:w-[30%]" />
+              {/* рамка-«наклейка»: смещённая пунктирная арка за фото */}
+              <div
+                aria-hidden="true"
+                className="shape-arch absolute left-[11%] top-[4%] h-[86%] w-[66%] border-[3px] border-dashed border-sky"
+              />
               <PhotoSlot
                 photo={p1}
                 alt={t.about.photoAlt}
                 tone="sky"
                 variant={0}
-                className="shape-arch absolute left-[6%] top-0 h-[86%] w-[66%] shadow-soft"
+                className="shape-arch absolute left-[6%] top-0 h-[86%] w-[66%] shadow-soft ring-[5px] ring-white"
+              />
+              {/* фигурная «фестонная» рамка круглого фото */}
+              <div
+                aria-hidden="true"
+                className="absolute bottom-[1%] right-[-3%] aspect-square w-[50%] animate-spin-slower bg-sun"
+                style={{ clipPath: "url(#clip-scallop)" }}
               />
               <PhotoSlot
                 photo={p2}
@@ -46,12 +62,11 @@ export function About() {
                 tone="sun"
                 variant={2}
                 sizes="260px"
-                className="absolute bottom-[4%] right-0 aspect-square w-[44%] rounded-full shadow-lift ring-[6px] ring-white"
+                className="absolute bottom-[4%] right-0 aspect-square w-[44%] rounded-full shadow-lift ring-[5px] ring-white"
               />
-              <Cube className="absolute -top-2 right-[22%] w-11 animate-float [--r:12deg] lg:w-10" color="#E83A32" />
-              <SoftStar className="absolute right-[6%] top-[34%] hidden w-9 animate-wiggle sm:block" color="#80C924" />
-              <Sparkle className="absolute bottom-[30%] left-[-2%] hidden w-6 animate-twinkle sm:block" color="#159FE2" />
-              {/* Адам «показывает» садик: ширина — доля коллажа, поэтому масштабируется вместе с ним */}
+              <CubeStack className="absolute -top-5 right-[12%] w-[22%] animate-float [--r:-4deg] sm:w-[19%]" />
+              <Bloom className="absolute right-[1%] top-[36%] hidden w-[11%] animate-spin-slower sm:block" />
+              {/* Әлем «показывает» садик: ширина — доля коллажа, поэтому масштабируется вместе с ним */}
               <div className="absolute -bottom-6 left-[-3%] w-[40%] sm:w-[42%]">
                 <MascotFigure
                   pose="about"

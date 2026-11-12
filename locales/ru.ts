@@ -33,8 +33,8 @@ export const ru = {
     contacts: "Контакты",
   },
   mascot: {
-    name: "Адам",
-    alt: "Адам — персонаж-помощник детского сада ALMASADAM",
+    name: "Әлем",
+    alt: "Әлем — персонаж-помощник детского сада ALMASADAM",
   },
   hero: {
     badge: "Частный детский сад в Алматы",
@@ -50,7 +50,7 @@ export const ru = {
     videoLabel: "Видео о жизни детского сада ALMASADAM",
     placeholderTitle: "Добро пожаловать!",
     placeholderText: "Мир открытий начинается здесь",
-    mascotSay: "Привет! Я Адам",
+    mascotSay: "Привет! Я Әлем",
   },
   about: {
     eyebrow: "О нас",
@@ -149,8 +149,8 @@ export const ru = {
     rights: "Все права защищены.",
   },
   helper: {
-    open: "Открыть помощника Адама",
-    title: "Привет! Я Адам",
+    open: "Открыть помощника Әлема",
+    title: "Привет! Я Әлем",
     text: "Куда отправимся?",
     actions: {
       about: "О садике",

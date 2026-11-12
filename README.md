@@ -28,7 +28,7 @@ npm run typecheck
 | Постер видео | `public/images/hero-poster.jpg` |
 | Картинка для соцсетей (OG) | `public/images/og-image.jpg` (1200×630) |
 | Фото «О нас» | `public/images/about-1.jpg`, `about-2.jpg` |
-| Маскот Адам | `public/mascot/adam-welcome.png`, `adam-about`, `adam-reading`, `adam-languages`, `adam-food`, `adam-news`, `adam-contact` (`.png` или `.webp`, прозрачный фон) |
+| Маскот Әлем | `public/mascot/adam-welcome.png`, `adam-about`, `adam-reading`, `adam-languages`, `adam-food`, `adam-news`, `adam-contact` (`.png` или `.webp`, прозрачный фон) |
 | Галерея | любые `.jpg/.png/.webp/.avif` в `public/gallery/` — появятся автоматически |
 | Иконка вкладки | замените `app/icon.svg` (сейчас временная нейтральная) на `app/icon.png` из фирменных файлов |
 
@@ -55,7 +55,7 @@ npm run typecheck
 ```
 app/                 layout (SEO, шрифты, JSON-LD), page, robots, sitemap, icon
 components/
-  layout/            Header, Footer, LangSwitch, FloatingActions (WhatsApp + помощник Адам)
+  layout/            Header, Footer, LangSwitch, FloatingActions (WhatsApp + помощник Әлем)
   desktop/           DesktopNav, ProgramsDesktop — отдельные десктопные композиции
   mobile/            MobileMenu, ProgramsMobile — отдельные мобильные композиции
   hero/              HeroVideo, HeroVideoPlaceholder

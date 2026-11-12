@@ -8,7 +8,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { Arch, Cube, Flower, Ring, Sparkle } from "@/components/ui/Decor";
+import { Bunting, Pencil } from "@/components/ui/Fun";
+import { Bloom, Organic, Swirl, Tulip } from "@/components/ui/Shapes";
 
 const twoGisUrl = "https://2gis.kz/almaty/search/" + encodeURIComponent("Рудаки 95");
 
@@ -24,6 +25,9 @@ export function Contacts() {
 
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="section-clip relative bg-milk">
+      {/* «Контакты» — тема праздника-встречи: гирлянда флажков, карандаш, цветы */}
+      <Bunting className="absolute right-0 top-0 h-9 w-[52%] sm:h-10 sm:w-[44%] lg:h-12 lg:w-[38%]" count={7} />
+      <Tulip className="absolute -left-1 bottom-10 hidden w-11 origin-bottom animate-sway xl:block" color="#7B5CE0" />
       <div className="container-site section-y !pt-8 lg:!pt-8">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-14">
           <div>
@@ -51,7 +55,7 @@ export function Contacts() {
             </Reveal>
 
             <div className="relative mt-6 hidden w-fit pl-2 lg:block">
-              <Arch className="absolute bottom-0 left-[4%] w-[86%]" color="#DFF2C4" />
+              <Organic className="absolute -bottom-2 left-[2%] w-[88%] -rotate-6" color="#DFF2C4" />
               <MascotFigure
                 pose="contact"
                 variant="calm"
@@ -65,10 +69,9 @@ export function Contacts() {
           </div>
 
           <Reveal delay={0.05} className="relative">
-            <Cube className="absolute -right-2 -top-6 z-10 w-14 animate-float lg:w-11 [--r:12deg]" color="#FFE326" />
-            <Sparkle className="absolute -left-3 bottom-10 z-10 w-6 animate-twinkle" color="#159FE2" />
-            <Ring className="absolute -bottom-8 -right-8 hidden w-32 animate-spin-slower opacity-70 sm:block" color="#CDECFB" />
-            <Flower className="absolute -left-7 top-[30%] z-10 hidden w-12 animate-wiggle lg:block" color="#E83A32" center="#FFE326" />
+            <Pencil className="absolute -top-9 right-4 z-10 w-28 rotate-[-10deg] animate-bob sm:w-32 lg:w-28" color="#E83A32" />
+            <Bloom className="absolute -bottom-5 -left-3 z-10 w-12 animate-spin-slower sm:w-14" petals={["#FFE326", "#FF8A1F"]} center="#fff" />
+            <Swirl className="absolute -bottom-10 -right-10 hidden w-32 animate-spin-rev opacity-60 sm:block" color="#CDECFB" dot="#80C924" />
             <div className="relative overflow-hidden rounded-[36px] bg-violet p-3 shadow-lift sm:p-4 lg:rounded-[40px_40px_14px_40px] lg:p-3.5">
               <ul className="grid gap-2.5 sm:gap-3 lg:gap-2.5">
                 {rows.map(({ icon: Icon, label, value, href, tone, external }) => {
@@ -118,7 +121,7 @@ export function Contacts() {
           </Reveal>
 
           <div className="relative mx-auto w-fit pr-24 lg:hidden">
-            <Arch className="absolute bottom-0 left-[2%] w-[56%]" color="#DFF2C4" />
+            <Organic className="absolute -bottom-2 left-[0%] w-[60%] -rotate-6" color="#DFF2C4" />
             <MascotFigure
               pose="contact"
               variant="calm"
