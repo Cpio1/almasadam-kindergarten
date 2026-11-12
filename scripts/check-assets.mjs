@@ -88,6 +88,26 @@ function findImage(baseRel) {
   return null;
 }
 
+/**
+ * Есть ли в MP4/MOV звуковая дорожка: ищем box «hdlr» с типом обработчика «soun».
+ * Для WebM честно не проверяем — считаем, что звук есть (кнопка всё равно перепроверит в браузере).
+ */
+function videoHasAudio(rel) {
+  if (!rel.endsWith(".mp4") && !rel.endsWith(".mov")) return true;
+  let buf;
+  try {
+    buf = fs.readFileSync(path.join(pub, rel));
+  } catch {
+    return false;
+  }
+  let i = buf.indexOf("hdlr");
+  while (i !== -1) {
+    if (buf.toString("ascii", i + 12, i + 16) === "soun") return true;
+    i = buf.indexOf("hdlr", i + 4);
+  }
+  return false;
+}
+
 const logo = findImage("images/logo");
 const heroPoster = findImage("videos/main-page-poster") ?? findImage("images/hero-poster");
 const ogImage = findImage("images/og-image");
@@ -101,7 +121,11 @@ for (const rel of [
   "videos/almasadam-hero.webm",
 ]) {
   if (exists(rel)) {
-    heroVideo = { src: "/" + rel, type: rel.endsWith(".webm") ? "video/webm" : "video/mp4" };
+    heroVideo = {
+      src: "/" + rel,
+      type: rel.endsWith(".webm") ? "video/webm" : "video/mp4",
+      hasAudio: videoHasAudio(rel),
+    };
     break;
   }
 }

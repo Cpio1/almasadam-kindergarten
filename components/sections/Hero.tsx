@@ -113,9 +113,11 @@ export function Hero() {
             <Ring className="absolute -bottom-6 right-[12%] -z-10 hidden w-24 animate-spin-slower sm:block" color="#80C924" />
             <SoftStar className="absolute -left-4 top-[12%] z-10 hidden w-10 animate-wiggle [animation-delay:-2s] lg:block" color="#E83A32" />
             <HeroVideo />
-            {/* Әлем приветствует — крупный, стоит у края рамки видео.
-                Телефон: в левом нижнем углу, частично ниже рамки. Десктоп: выходит за левый край рамки. */}
-            <div className="pointer-events-none absolute -bottom-14 -left-1 lg:-bottom-8 lg:-left-20">
+            {/* Әлем приветствует — крупный, стоит у края рамки видео и почти не закрывает детей в ролике.
+                Телефон/планшет: в левом нижнем углу, бо́льшая часть фигуры — ниже рамки.
+                Десктоп: преимущественно слева от рамки, в промежутке между колонками;
+                сдвиг растёт с шириной экрана (≈ −140px на 1280, −176px на 1920). Облачко — часть фигуры. */}
+            <div className="pointer-events-none absolute -bottom-[clamp(104px,30vw,140px)] -left-2 lg:-bottom-8 lg:-left-[calc(80px+clamp(60px,5vw,100px))]">
               <MascotFigure
                 pose="welcome"
                 variant="wave"
@@ -133,7 +135,7 @@ export function Hero() {
 
           <motion.ul
             data-area="perks"
-            className="mt-20 grid gap-2.5 sm:grid-cols-3 lg:mt-6 lg:grid-cols-[auto_auto] lg:justify-start lg:gap-2.5"
+            className="mt-32 grid gap-2.5 sm:mt-40 sm:grid-cols-3 lg:mt-6 lg:grid-cols-[auto_auto] lg:justify-start lg:gap-2.5"
             {...fadeUp(0.28)}
           >
             {perks.map(({ icon: Icon, label, note, cls }, i) => (

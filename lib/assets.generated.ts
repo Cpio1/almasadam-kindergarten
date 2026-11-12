@@ -11,7 +11,8 @@ export const assetManifest: AssetManifest = {
   },
   "heroVideo": {
     "src": "/videos/main-page.mp4",
-    "type": "video/mp4"
+    "type": "video/mp4",
+    "hasAudio": true
   },
   "ogImage": null,
   "mascot": {

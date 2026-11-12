@@ -14,7 +14,7 @@ export type MascotPose =
 export type AssetManifest = {
   logo: ImageAsset | null;
   heroPoster: ImageAsset | null;
-  heroVideo: { src: string; type: string } | null;
+  heroVideo: { src: string; type: string; hasAudio: boolean } | null;
   ogImage: ImageAsset | null;
   mascot: Record<MascotPose, ImageAsset | null>;
   aboutPhotos: (ImageAsset | null)[];
