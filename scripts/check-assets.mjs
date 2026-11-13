@@ -138,11 +138,38 @@ const mascot = Object.fromEntries(poses.map((p) => [p, findImage(`mascot/adam-${
 
 const aboutPhotos = [1, 2, 3].map((n) => findImage(`images/about-${n}`));
 
+// Фото педагогов: public/images/teachers/<id>.jpg|webp|png (id — из data/teachers.ts)
+const teacherIds = [
+  "ni-olga",
+  "turdiev-ruslan",
+  "maria",
+  "kurmashova-symbat",
+  "tokhtamova-shakhidyam",
+  "rakhimova-aisulu",
+];
+const teachers = Object.fromEntries(teacherIds.map((id) => [id, findImage(`images/teachers/${id}`)]));
+
+/**
+ * Исходники портретов педагогов (их копии случайно попали и в public/gallery/).
+ * В «Галерее» их не показываем — это не фото из жизни сада.
+ */
+const TEACHER_SOURCES = new Set(
+  [
+    "Ни_Ольга_Васильевна",
+    "Турдиев_Руслан_Педаевич",
+    "Мария",
+    "Курмашова_Сымбат_Турсыновна",
+    "Тохтамова_Шахидям_Азизовна",
+    "Рахимова_Айсулу_Сериковна",
+  ].map((n) => n.normalize("NFC")),
+);
+const isTeacherSource = (f) => TEACHER_SOURCES.has(path.parse(f).name.normalize("NFC"));
+
 let gallery = [];
 try {
   gallery = fs
     .readdirSync(path.join(pub, "gallery"))
-    .filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()))
+    .filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()) && !isTeacherSource(f))
     .sort((a, b) => a.localeCompare(b, "en", { numeric: true }))
     .map((f) => {
       const rel = `gallery/${f}`;
@@ -166,7 +193,7 @@ try {
   documents = [];
 }
 
-const manifest = { logo, heroPoster, heroVideo, ogImage, mascot, aboutPhotos, gallery, documents };
+const manifest = { logo, heroPoster, heroVideo, ogImage, mascot, aboutPhotos, teachers, gallery, documents };
 
 const file = `// ⚠️ Файл сгенерирован автоматически скриптом scripts/check-assets.mjs.
 // Не редактируйте вручную — добавьте файлы в public/ и перезапустите dev/build.
@@ -183,6 +210,7 @@ const found = [
   heroVideo && "hero video",
   heroPoster && "poster",
   ...Object.entries(mascot).filter(([, v]) => v).map(([k]) => `mascot:${k}`),
+  `teachers×${Object.values(teachers).filter(Boolean).length}`,
   gallery.length && `gallery×${gallery.length}`,
   documents.length && `documents×${documents.length}`,
 ].filter(Boolean);

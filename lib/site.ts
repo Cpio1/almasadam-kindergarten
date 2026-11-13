@@ -47,11 +47,13 @@ export function whatsappLink(message?: string) {
 /**
  * Порядок и якоря разделов (Header, мобильное меню, футер). Подписи — в locales/*.ts → nav.
  * "top" — первый экран (Главная). Изучение языков — часть раздела "programs".
+ * "teachers" — «Наши педагоги» (между программами и питанием).
  */
 export const sections = [
   "top",
   "about",
   "programs",
+  "teachers",
   "food",
   "gallery",
   "news",

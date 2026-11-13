@@ -21,6 +21,8 @@ export type AssetManifest = {
   ogImage: ImageAsset | null;
   mascot: Record<MascotPose, ImageAsset | null>;
   aboutPhotos: (ImageAsset | null)[];
+  /** Портреты педагогов: public/images/teachers/<id>.jpg (ключ — id из data/teachers.ts) */
+  teachers: Record<string, ImageAsset | null>;
   gallery: ImageAsset[];
 };
 

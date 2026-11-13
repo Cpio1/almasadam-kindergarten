@@ -7,6 +7,7 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Programs } from "@/components/sections/Programs";
+import { Teachers } from "@/components/sections/Teachers";
 import { Food } from "@/components/sections/Food";
 import { Gallery } from "@/components/sections/Gallery";
 import { News } from "@/components/sections/News";
@@ -25,6 +26,7 @@ export default function HomePage() {
           <Hero />
           <About />
           <Programs />
+          <Teachers />
           <Food />
           <Gallery />
           <News />

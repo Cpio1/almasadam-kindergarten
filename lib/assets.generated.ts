@@ -54,6 +54,38 @@ export const assetManifest: AssetManifest = {
     null,
     null
   ],
+  "teachers": {
+    "ni-olga": {
+      "src": "/images/teachers/ni-olga.jpg",
+      "height": 1400,
+      "width": 787
+    },
+    "turdiev-ruslan": {
+      "src": "/images/teachers/turdiev-ruslan.jpg",
+      "height": 1400,
+      "width": 787
+    },
+    "maria": {
+      "src": "/images/teachers/maria.jpg",
+      "height": 1400,
+      "width": 1050
+    },
+    "kurmashova-symbat": {
+      "src": "/images/teachers/kurmashova-symbat.jpg",
+      "height": 1400,
+      "width": 1050
+    },
+    "tokhtamova-shakhidyam": {
+      "src": "/images/teachers/tokhtamova-shakhidyam.jpg",
+      "height": 1400,
+      "width": 1050
+    },
+    "rakhimova-aisulu": {
+      "src": "/images/teachers/rakhimova-aisulu.jpg",
+      "height": 1400,
+      "width": 1050
+    }
+  },
   "gallery": [],
   "documents": []
 };

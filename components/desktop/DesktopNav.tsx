@@ -7,11 +7,12 @@ import { sections, type SectionId } from "@/lib/site";
 import { useI18n } from "@/lib/i18n";
 
 /**
- * Пункты в меню «Ещё»: на ноутбуках (1024–1439px) — галерея, новости, документы, контакты;
- * на широких экранах (≥1440px) — новости, документы и контакты (длинные подписи не помещаются в строку).
+ * Пункты в меню «Ещё». Ширина контейнера шапки одинакова на всех десктопах (max 1240px),
+ * а казахские подписи длиннее, поэтому набор один: в строке — Главная, О нас, Программы, Педагоги;
+ * питание, галерея, новости, документы и контакты — в «Ещё».
  */
-const overflowLaptop: SectionId[] = ["gallery", "news", "documents", "contacts"];
-const overflowWide: SectionId[] = ["news", "documents", "contacts"];
+const overflowLaptop: SectionId[] = ["food", "gallery", "news", "documents", "contacts"];
+const overflowWide: SectionId[] = overflowLaptop;
 
 export function DesktopNav({
   active,
