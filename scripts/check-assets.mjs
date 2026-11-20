@@ -167,6 +167,8 @@ const isTeacherSource = (f) => TEACHER_SOURCES.has(path.parse(f).name.normalize(
 
 let gallery = [];
 try {
+  // Одинаковые по содержимому файлы (даже под разными именами) показываем один раз
+  const seenHashes = new Set();
   gallery = fs
     .readdirSync(path.join(pub, "gallery"))
     .filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()) && !isTeacherSource(f))
@@ -174,7 +176,11 @@ try {
     .map((f) => {
       const rel = `gallery/${f}`;
       const size = imageSize(rel);
-      return size ? { src: "/" + rel, ...size } : null;
+      if (!size) return null;
+      const hash = crypto.createHash("md5").update(fs.readFileSync(path.join(pub, rel))).digest("hex");
+      if (seenHashes.has(hash)) return null;
+      seenHashes.add(hash);
+      return { src: "/" + rel, ...size };
     })
     .filter(Boolean);
 } catch {

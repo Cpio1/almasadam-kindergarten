@@ -134,7 +134,7 @@ export const ru = {
     eyebrow: "Галерея",
     title: "Счастливые моменты",
     subtitle: "Улыбки и открытия каждого дня.",
-    showMore: "Показать больше",
+    showMore: "Показать ещё",
     photoAlt: "Фото из жизни детского сада ALMASADAM",
     openPhoto: "Открыть фото",
     counter: "из",

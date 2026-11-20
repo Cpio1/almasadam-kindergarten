@@ -16,7 +16,17 @@ export type GalleryEntry = {
 };
 
 export const galleryConfig: GalleryEntry[] = [
-  // { src: "/gallery/01.jpg", alt: { ru: "Утренняя зарядка", kz: "Таңғы жаттығу" } },
+  { src: "/gallery/01-facade.jpeg", alt: { ru: "Наш детский сад", kz: "Біздің балабақша" } },
+  { src: "/gallery/02-hall.jpeg", alt: { ru: "Уютный холл", kz: "Жайлы холл" } },
+  { src: "/gallery/03-tree-mural.jpeg", alt: { ru: "Сказочное дерево", kz: "Ертегі ағашы" } },
+  { src: "/gallery/04-blue-bedroom.jpeg", alt: { ru: "Голубая спальня", kz: "Көгілдір жатын бөлме" } },
+  { src: "/gallery/05-classroom.jpeg", alt: { ru: "Учимся играя", kz: "Ойнап үйренеміз" } },
+  { src: "/gallery/06-festive-hall.jpeg", alt: { ru: "Праздничный зал", kz: "Мерекелік зал" } },
+  { src: "/gallery/07-butterfly-stairs.jpeg", alt: { ru: "Лестница с бабочками", kz: "Көбелекті баспалдақ" } },
+  { src: "/gallery/08-bedroom.jpeg", alt: { ru: "Спальня", kz: "Жатын бөлме" } },
+  { src: "/gallery/09-group-room.jpeg", alt: { ru: "Групповая комната", kz: "Топ бөлмесі" } },
+  { src: "/gallery/10-playroom.jpeg", alt: { ru: "Игровая комната", kz: "Ойын бөлмесі" } },
+  { src: "/gallery/11-art-corner.jpeg", alt: { ru: "Уголок творчества", kz: "Шығармашылық бұрышы" } },
 ];
 
 /** Сколько фото показывать сразу и сколько добавлять по кнопке «Показать больше». */

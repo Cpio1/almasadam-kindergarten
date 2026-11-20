@@ -134,7 +134,7 @@ export const kz: Dictionary = {
     eyebrow: "Галерея",
     title: "Бақытты сәттер",
     subtitle: "Күн сайынғы күлкі мен ашылымдар.",
-    showMore: "Көбірек көрсету",
+    showMore: "Тағы көрсету",
     photoAlt: "ALMASADAM балабақшасының өмірінен фото",
     openPhoto: "Фотоны ашу",
     counter: "/",

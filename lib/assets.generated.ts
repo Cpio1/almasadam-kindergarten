@@ -86,6 +86,62 @@ export const assetManifest: AssetManifest = {
       "width": 1050
     }
   },
-  "gallery": [],
+  "gallery": [
+    {
+      "src": "/gallery/01-facade.jpeg",
+      "height": 817,
+      "width": 1302
+    },
+    {
+      "src": "/gallery/02-hall.jpeg",
+      "height": 977,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/03-tree-mural.jpeg",
+      "height": 1600,
+      "width": 1048
+    },
+    {
+      "src": "/gallery/04-blue-bedroom.jpeg",
+      "height": 972,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/05-classroom.jpeg",
+      "height": 958,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/06-festive-hall.jpeg",
+      "height": 987,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/07-butterfly-stairs.jpeg",
+      "height": 1600,
+      "width": 1016
+    },
+    {
+      "src": "/gallery/08-bedroom.jpeg",
+      "height": 998,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/09-group-room.jpeg",
+      "height": 991,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/10-playroom.jpeg",
+      "height": 987,
+      "width": 1320
+    },
+    {
+      "src": "/gallery/11-art-corner.jpeg",
+      "height": 934,
+      "width": 1320
+    }
+  ],
   "documents": []
 };

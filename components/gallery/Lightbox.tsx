@@ -77,18 +77,18 @@ export function Lightbox({
             <X className="size-6" aria-hidden="true" />
           </button>
 
-          <p className="pointer-events-none absolute left-1/2 top-[max(22px,env(safe-area-inset-top))] -translate-x-1/2 font-display text-sm font-bold text-white/80">
+          <p className="pointer-events-none absolute left-1/2 top-[max(18px,env(safe-area-inset-top))] -translate-x-1/2 rounded-full bg-white/12 px-4 py-1.5 font-display text-sm font-bold tabular-nums text-white">
             {(index ?? 0) + 1} {t.gallery.counter} {photos.length}
           </p>
 
           <AnimatePresence initial={false} mode="popLayout" custom={direction}>
-            <motion.div
+            <motion.figure
               key={photo.src}
               custom={direction}
-              initial={{ opacity: 0, x: direction * 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -60 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, x: direction * 70, scale: 0.94 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: direction * -70, scale: 0.96 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               drag={photos.length > 1 ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.5}
@@ -99,23 +99,42 @@ export function Lightbox({
               onClick={(e) => {
                 if (e.target === e.currentTarget) onClose();
               }}
-              className="w-full touch-pan-y px-3 sm:px-20"
+              className="m-0 flex w-full touch-pan-y flex-col items-center px-3 [--lb-h:66svh] sm:px-20 sm:[--lb-h:76svh]"
             >
+              {/* Пропорции сохраняются: ширина ограничена и экраном, и высотой (--lb-h), без обрезки */}
               <Image
                 src={photo.src}
                 width={photo.width}
                 height={photo.height}
                 alt={photo.alt}
-                sizes="92vw"
+                sizes="(max-width: 640px) 100vw, 92vw"
+                quality={85}
                 draggable={false}
                 style={{
-                  width: `min(100%, calc(80svh * ${photo.width / photo.height}))`,
+                  width: `min(100%, calc(var(--lb-h) * ${photo.width / photo.height}))`,
                   height: "auto",
                 }}
-                className="mx-auto select-none rounded-[20px] object-contain sm:rounded-[28px]"
+                className="mx-auto select-none rounded-[20px] object-contain shadow-[0_20px_60px_rgb(0_0_0/0.45)] ring-4 ring-white/90 sm:rounded-[28px]"
               />
-            </motion.div>
+              {photo.caption ? (
+                <figcaption className="mt-4 rounded-full bg-sun px-4 py-1.5 text-center font-display text-sm font-bold text-violet sm:text-base">
+                  {photo.caption}
+                </figcaption>
+              ) : null}
+            </motion.figure>
           </AnimatePresence>
+
+          {/* Предзагрузка соседних фото — листание без задержек */}
+          {photos.length > 1 ? (
+            <div aria-hidden="true" className="pointer-events-none absolute size-px overflow-hidden opacity-0">
+              {[1, -1].map((d) => {
+                const n = photos[((index ?? 0) + d + photos.length) % photos.length];
+                return (
+                  <Image key={`${d}-${n.src}`} src={n.src} width={n.width} height={n.height} alt="" sizes="(max-width: 640px) 100vw, 92vw" quality={85} />
+                );
+              })}
+            </div>
+          ) : null}
 
           {photos.length > 1 ? (
             <>
