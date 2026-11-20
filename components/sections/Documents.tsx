@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FolderOpen } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { assets } from "@/lib/assets";
-import { documents, documentCategories, type DocumentCategory, type DocumentItem } from "@/data/documents";
+import { DOCUMENTS_CLOUD_URL, documents, documentCategories, type DocumentCategory, type DocumentItem } from "@/data/documents";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MascotFigure } from "@/components/ui/MascotFigure";
 import { Reveal } from "@/components/ui/Reveal";
-import { Wave } from "@/components/ui/Decor";
+import { Ring, Sparkle, Wave } from "@/components/ui/Decor";
 import { Star3D } from "@/components/ui/Fun";
 import { Cube3D, Organic, Zigzag } from "@/components/ui/Shapes";
 import { BigFolder, FileBadge, PaperPlane, Paperclip } from "@/components/documents/DocArt";
@@ -126,29 +126,88 @@ function DocCard({ doc, i }: { doc: DocumentItem; i: number }) {
   );
 }
 
-/** Временный блок, пока в data/documents.ts нет ни одного рабочего документа */
-function ComingSoon() {
+/** Мерцающие звёздочки внутри карточки: [позиция, размер, цвет, задержка] */
+const sparkles: [string, string, string, string][] = [
+  ["left-[6%] top-[10%]", "w-4 lg:w-5", "#FFE326", "0s"],
+  ["left-[44%] top-[7%]", "w-3 lg:w-4", "#9FDDF9", "-1.2s"],
+  ["right-[5%] top-[16%]", "w-5 lg:w-6", "#FFE326", "-2.1s"],
+  ["right-[38%] bottom-[9%]", "w-3.5", "#A6E04F", "-0.6s"],
+  ["left-[3%] bottom-[24%]", "w-3 lg:w-4", "#fff", "-2.8s"],
+  ["right-[12%] bottom-[30%]", "w-3", "#fff", "-1.7s"],
+];
+
+/**
+ * Главная карточка: папка «Документы Almasadam» в Облаке Mail.ru.
+ * Десктоп — текст и кнопка слева, папка и Әлем справа; телефон — иллюстрация сверху, затем текст и кнопка.
+ */
+function CloudFolderCard() {
   const { t } = useI18n();
   return (
-    <Reveal className="relative">
-      <div className="relative isolate overflow-hidden rounded-[36px_36px_36px_12px] bg-white px-5 pb-7 pt-6 text-center shadow-soft ring-1 ring-violet-100 sm:px-8 lg:rounded-[48px_48px_48px_16px] lg:px-10 lg:py-9">
-        <Organic className="absolute -right-14 -top-16 -z-10 w-56 opacity-70 lg:w-72" color="#FFF4A8" variant={1} />
-        <Organic className="absolute -bottom-20 -left-16 -z-10 w-56 opacity-70 lg:w-64" color="#EAF7FE" />
-        <Paperclip className="absolute left-5 top-4 w-5 rotate-[18deg] sm:left-8 sm:w-6" color="#E83A32" />
-        <Star3D className="absolute right-4 top-4 w-9 animate-wiggle sm:right-6 sm:w-11" color="#80C924" shade="#4f8a0c" />
+    <Reveal>
+      <div className="group relative isolate overflow-hidden rounded-[36px_36px_36px_14px] bg-[linear-gradient(140deg,#6B4FD8_0%,#4A33A8_48%,#302079_100%)] px-5 pb-6 pt-5 shadow-[0_8px_0_#1b1150,0_26px_50px_-18px_rgb(48_32_121/0.55)] transition-transform duration-500 ease-out hover:-translate-y-1 sm:px-8 sm:pb-8 lg:rounded-[52px_52px_52px_18px] lg:px-12 lg:py-10">
+        {/* фон: горошек, мягкие пятна, кольцо, зигзаг */}
+        <span aria-hidden="true" className="dots-bg pointer-events-none absolute inset-0 -z-10 opacity-30 mix-blend-soft-light" />
+        <Organic className="absolute -right-16 -top-20 -z-10 w-64 opacity-25 animate-morph lg:-right-10 lg:w-96" color="#159FE2" variant={1} />
+        <Organic className="absolute -bottom-24 -left-20 -z-10 w-60 opacity-20 lg:w-80" color="#80C924" />
+        <Ring className="absolute -left-8 bottom-[-6%] -z-10 hidden w-24 opacity-40 sm:block" color="#FFE326" />
+        <Zigzag className="absolute bottom-5 right-[44%] -z-10 hidden w-24 opacity-60 lg:block" color="#9FDDF9" />
+        {sparkles.map(([pos, size, color, delay]) => (
+          <Sparkle
+            key={pos}
+            className={`absolute -z-10 animate-twinkle ${pos} ${size}`}
+            color={color}
+            style={{ animationDelay: delay }}
+          />
+        ))}
 
-        <BigFolder className="mx-auto w-[min(250px,72%)] animate-float [--r:-2deg] lg:w-[270px]" />
-        <h3 className="mt-4 text-[clamp(1.35rem,1.1rem+1.1vw,1.85rem)] font-black leading-tight">{t.documents.emptyTitle}</h3>
-        <p className="mx-auto mt-2 max-w-[30ch] text-[1rem] text-ink-soft">{t.documents.emptyText}</p>
-        {/* цветные «корешки папок» — чистый декор */}
-        <div aria-hidden="true" className="mx-auto mt-5 flex w-fit items-end gap-1.5">
-          {["bg-violet h-7", "bg-sky h-9", "bg-sun h-6", "bg-leaf h-8", "bg-berry h-5"].map((c, i) => (
-            <span
-              key={c}
-              className={`w-6 animate-bob rounded-t-[10px] sm:w-8 ${c}`}
-              style={{ animationDelay: `${i * -0.7}s` }}
+        <div className="grid items-center gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10">
+          {/* иллюстрация: папка + Әлем (на телефоне — сверху) */}
+          <div className="relative mx-auto flex w-full max-w-[420px] items-end justify-center lg:order-2 lg:max-w-none">
+            <Organic className="absolute bottom-[2%] left-1/2 w-[86%] -translate-x-1/2 -rotate-6 opacity-95" color="#FFE326" variant={1} />
+            <Star3D className="absolute left-[2%] top-[4%] w-9 animate-wiggle sm:w-11" color="#80C924" shade="#4f8a0c" />
+            <Cube3D className="absolute right-[1%] top-[2%] hidden w-12 animate-float [--r:10deg] sm:block lg:w-14" color="#E83A32" letter="Қ" />
+            <Paperclip className="absolute left-[38%] top-[-2%] w-4 rotate-[22deg] animate-sway sm:w-5" color="#E83A32" />
+            <BigFolder className="relative w-[64%] max-w-[300px] animate-float drop-shadow-[0_14px_14px_rgb(27_17_80/0.35)] transition-transform duration-500 ease-out [--r:-3deg] group-hover:scale-[1.04] lg:w-[62%]" />
+            <MascotFigure
+              pose="documents"
+              variant="calm"
+              size="custom"
+              delay={0.15}
+              className="relative -ml-[8%] w-[clamp(104px,30vw,150px)] lg:w-[clamp(150px,13vw,200px)]"
+              sizes="(max-width: 1024px) 150px, 200px"
             />
-          ))}
+          </div>
+
+          {/* текст и кнопка (на десктопе — слева) */}
+          <div className="relative text-center lg:order-1 lg:text-left">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 font-display text-[0.8rem] font-extrabold text-white ring-1 ring-white/25">
+              <FolderOpen className="size-4 text-sun" aria-hidden="true" />
+              {t.documents.cloudNote}
+            </span>
+            <h3 className="mt-3 text-[clamp(1.55rem,1.2rem+1.6vw,2.5rem)] font-black leading-[1.08] !text-white">
+              {t.documents.cloudTitle}
+            </h3>
+            <p className="mx-auto mt-2.5 max-w-[34ch] text-[1.02rem] leading-snug text-white/85 lg:mx-0 lg:text-[1.1rem]">
+              {t.documents.cloudText}
+            </p>
+            {/* цветные «корешки папок» — декор */}
+            <div aria-hidden="true" className="mx-auto mt-4 flex w-fit items-end gap-1.5 lg:mx-0">
+              {["bg-sun h-5", "bg-sky h-7", "bg-leaf h-4", "bg-white h-6", "bg-berry h-3.5"].map((c, i) => (
+                <span key={c} className={`w-5 animate-bob rounded-t-[8px] sm:w-6 ${c}`} style={{ animationDelay: `${i * -0.7}s` }} />
+              ))}
+            </div>
+            <a
+              href={DOCUMENTS_CLOUD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mt-5 w-full !min-h-14 bg-sun !px-7 !text-[1.08rem] text-violet shadow-[0_5px_0_#d9a800] hover:-translate-y-0.5 hover:bg-[#ffd900] hover:shadow-[0_7px_0_#d9a800] sm:w-auto lg:!min-h-14"
+            >
+              <FolderOpen className="size-5" aria-hidden="true" />
+              {t.documents.cloudBtn}
+              <ExternalLink className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+              <span className="sr-only"> ({t.common.opensInNewTab})</span>
+            </a>
+          </div>
         </div>
       </div>
     </Reveal>
@@ -156,73 +215,45 @@ function ComingSoon() {
 }
 
 /**
- * «Документы» / «Құжаттар». Список — data/documents.ts, файлы — public/documents/.
- * Пока рабочих документов нет — «Документы скоро появятся»; затем блок сам сменяется карточками.
+ * «Документы» / «Құжаттар». Главная карточка — папка в Облаке Mail.ru (DOCUMENTS_CLOUD_URL).
+ * Отдельные документы из data/documents.ts (если добавлены) — карточками под ней.
  */
 export function Documents() {
   const { t } = useI18n();
   const order = (c: DocumentCategory) => documentCategories.indexOf(c);
   const list = documents.filter(isAvailable).sort((a, b) => order(a.category) - order(b.category));
-  const hasDocs = list.length > 0;
 
   return (
     <section
       id="documents"
       aria-labelledby="documents-title"
-      className="section-clip relative bg-[linear-gradient(180deg,#FFFCF5_0%,#F3F0FD_45%,#EAF7FE_80%,#FFFCF5_100%)]"
+      className="section-clip relative overflow-x-clip bg-[linear-gradient(180deg,#FFFCF5_0%,#F3F0FD_45%,#EAF7FE_80%,#FFFCF5_100%)]"
     >
-      {/* декор раздела: самолётик, зигзаг, кубик — в полях, не у текста */}
+      {/* декор раздела — в полях, не у текста */}
       <PaperPlane className="absolute right-3 top-4 w-20 animate-orbit sm:right-8 sm:w-24 lg:right-[4%] lg:top-8 lg:w-32" />
       <Zigzag className="absolute -left-8 top-[46%] hidden w-28 rotate-90 xl:block" color="#FFE326" />
-      <Cube3D className="absolute -right-3 bottom-24 hidden w-14 animate-float [--r:12deg] xl:block" color="#E83A32" letter="Қ" />
+      <Cube3D className="absolute -right-3 bottom-24 hidden w-14 animate-float [--r:12deg] xl:block" color="#80C924" letter="A" />
 
       <div className="container-site section-y relative !pt-8 lg:!pt-8">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-12 xl:gap-16">
-          {/* заголовок + Әлем с папкой */}
-          <div>
-            <SectionHeading
-              id="documents-title"
-              eyebrow={t.documents.eyebrow}
-              title={t.documents.title}
-              subtitle={t.documents.subtitle}
-              tone="violet"
-            />
-            {/* Әлем у «веера» файлов: телефон — Әлем слева, файлы справа; десктоп — наоборот */}
-            <div className="relative mt-5 flex min-h-[210px] items-end justify-start sm:min-h-[240px] lg:mt-6 lg:min-h-[300px] lg:justify-end">
-              <Organic className="absolute bottom-[-6%] left-[2%] w-[60%] max-w-[300px] -rotate-6 lg:left-auto lg:right-[6%] lg:w-[66%]" color="#FFE326" />
-              <div aria-hidden="true" className="absolute bottom-[6%] right-[2%] h-[62%] w-[42%] max-w-[210px] sm:right-[10%] lg:left-0 lg:right-auto lg:w-[44%]">
-                <FileBadge label="PDF" color="#E83A32" className="absolute bottom-0 left-0 w-[37%] animate-float [--r:-14deg]" />
-                <FileBadge label="123" color="#159FE2" className="absolute bottom-[16%] left-[31%] w-[37%] animate-float [--r:2deg] [animation-delay:-1.5s]" />
-                <FileBadge label="★" color="#80C924" ink="#302079" className="absolute bottom-0 left-[62%] w-[37%] animate-float [--r:14deg] [animation-delay:-3s]" />
-                <Paperclip className="absolute -top-2 left-[44%] w-4 rotate-[24deg] animate-sway sm:w-5" color="#7B5CE0" />
-              </div>
-              <MascotFigure
-                pose="documents"
-                variant="calm"
-                size="custom"
-                delay={0.15}
-                say={t.documents.mascotSay}
-                bubbleSide="right"
-                bubbleClassName="max-[399px]:!left-[52%]"
-                className="relative ml-[4%] w-[clamp(132px,40vw,184px)] lg:ml-0 lg:mr-[22%] lg:w-[clamp(190px,15vw,232px)]"
-                sizes="(max-width: 1024px) 190px, 232px"
-              />
-            </div>
-          </div>
+        <SectionHeading
+          id="documents-title"
+          eyebrow={t.documents.eyebrow}
+          title={t.documents.title}
+          subtitle={t.documents.subtitle}
+          tone="violet"
+        />
 
-          {/* карточки или временный блок */}
-          <div className="relative">
-            {hasDocs ? (
-              <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-                {list.map((d, i) => (
-                  <DocCard key={d.id} doc={d} i={i} />
-                ))}
-              </ul>
-            ) : (
-              <ComingSoon />
-            )}
-          </div>
+        <div className="mt-7 lg:mt-9">
+          <CloudFolderCard />
         </div>
+
+        {list.length > 0 ? (
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            {list.map((d, i) => (
+              <DocCard key={d.id} doc={d} i={i} />
+            ))}
+          </ul>
+        ) : null}
       </div>
       <Wave fill="#FFFCF5" variant={1} />
     </section>

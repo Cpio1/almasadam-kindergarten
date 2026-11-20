@@ -164,8 +164,10 @@ export const ru = {
       parents: "Информация для родителей",
       other: "Другие официальные документы",
     },
-    emptyTitle: "Документы скоро появятся",
-    emptyText: "Мы готовим информацию для родителей",
+    cloudTitle: "Документы ALMASADAM",
+    cloudText: "Важные документы и информация для родителей",
+    cloudNote: "Папка в Облаке Mail.ru",
+    cloudBtn: "Посмотреть документы",
   },
   contacts: {
     eyebrow: "Контакты",

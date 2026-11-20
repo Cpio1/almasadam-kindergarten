@@ -164,8 +164,10 @@ export const kz: Dictionary = {
       parents: "Ата-аналарға арналған ақпарат",
       other: "Басқа ресми құжаттар",
     },
-    emptyTitle: "Құжаттар жақында пайда болады",
-    emptyText: "Ата-аналарға арналған ақпаратты дайындап жатырмыз",
+    cloudTitle: "ALMASADAM құжаттары",
+    cloudText: "Ата-аналарға арналған маңызды құжаттар мен ақпарат",
+    cloudNote: "Mail.ru Бұлтындағы бума",
+    cloudBtn: "Құжаттарды қарау",
   },
   contacts: {
     eyebrow: "Байланыс",
